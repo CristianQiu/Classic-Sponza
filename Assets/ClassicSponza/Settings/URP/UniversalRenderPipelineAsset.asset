@@ -24,7 +24,7 @@ MonoBehaviour:
   m_OpaqueDownsampling: 0
   m_SupportsTerrainHoles: 0
   m_SupportsHDR: 1
-  m_HDRColorBufferPrecision: 1
+  m_HDRColorBufferPrecision: 0
   m_MSAA: 1
   m_RenderScale: 1
   m_UpscalingFilter: 0
@@ -82,7 +82,7 @@ MonoBehaviour:
   m_UseFastSRGBLinearConversion: 0
   m_SupportDataDrivenLensFlare: 1
   m_SupportScreenSpaceLensFlare: 1
-  m_GPUResidentDrawerMode: 1
+  m_GPUResidentDrawerMode: 0
   m_SmallMeshScreenPercentage: 0
   m_GPUResidentDrawerEnableOcclusionCullingInCameras: 1
   m_ShadowType: 1
