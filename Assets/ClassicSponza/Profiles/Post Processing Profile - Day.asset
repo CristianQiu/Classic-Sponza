@@ -309,7 +309,7 @@ MonoBehaviour:
   chromaticAbberationIntensity:
     m_OverrideState: 1
     m_Value: 0.5
---- !u!114 &-1474102458479269988
+--- !u!114 &-2375668101386497201
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -324,25 +324,25 @@ MonoBehaviour:
   active: 1
   distance:
     m_OverrideState: 1
-    m_Value: 22
+    m_Value: 101.8
   baseHeight:
-    m_OverrideState: 0
-    m_Value: 0
+    m_OverrideState: 1
+    m_Value: 209.99
   maximumHeight:
-    m_OverrideState: 0
-    m_Value: 50
+    m_OverrideState: 1
+    m_Value: 209.99
   enableGround:
-    m_OverrideState: 0
-    m_Value: 0
+    m_OverrideState: 1
+    m_Value: 1
   groundHeight:
-    m_OverrideState: 0
-    m_Value: 0
+    m_OverrideState: 1
+    m_Value: -5.39
   density:
     m_OverrideState: 1
-    m_Value: 0.321
+    m_Value: 1
   attenuationDistance:
-    m_OverrideState: 0
-    m_Value: 128
+    m_OverrideState: 1
+    m_Value: 1111
   enableMainLightContribution:
     m_OverrideState: 1
     m_Value: 1
@@ -358,18 +358,21 @@ MonoBehaviour:
   enableAdditionalLightsContribution:
     m_OverrideState: 1
     m_Value: 1
+  noiseTexture:
+    m_OverrideState: 1
+    m_Value: {fileID: 11700000, guid: c78842ae75259f44dbe44b66f9b46ebe, type: 2}
   maxSteps:
     m_OverrideState: 1
-    m_Value: 256
+    m_Value: 68
   blurIterations:
-    m_OverrideState: 1
-    m_Value: 1
+    m_OverrideState: 0
+    m_Value: 2
   enabled:
     m_OverrideState: 1
     m_Value: 1
   renderPassEvent:
     m_OverrideState: 1
-    m_Value: 450
+    m_Value: 550
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -393,8 +396,8 @@ MonoBehaviour:
   - {fileID: 3165485838803951497}
   - {fileID: -3613035041921992082}
   - {fileID: -8561978266364178982}
-  - {fileID: -1474102458479269988}
   - {fileID: -3613994105213751816}
+  - {fileID: -2375668101386497201}
 --- !u!114 &2891247478753520741
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -488,6 +491,9 @@ MonoBehaviour:
   enableAdditionalLightsContribution:
     m_OverrideState: 1
     m_Value: 1
+  noiseTexture:
+    m_OverrideState: 0
+    m_Value: {fileID: 0}
   maxSteps:
     m_OverrideState: 1
     m_Value: 256
