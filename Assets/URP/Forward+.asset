@@ -73,7 +73,8 @@ MonoBehaviour:
   - {fileID: -1761948134687434656}
   - {fileID: 8456717938884998189}
   - {fileID: 367515877368583667}
-  m_RendererFeatureMap: 4b9fa11ff6fb178f60184bb7814d8ce72df4e9e8284c5c75f3d5de47bead1905
+  - {fileID: 28834500521074391}
+  m_RendererFeatureMap: 4b9fa11ff6fb178f60184bb7814d8ce72df4e9e8284c5c75f3d5de47bead1905d79ed550d3706600
   m_UseNativeRenderPass: 1
   xrSystemData: {fileID: 0}
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
@@ -102,6 +103,21 @@ MonoBehaviour:
   m_DepthTextureFormat: 0
   m_AccurateGbufferNormals: 1
   m_IntermediateTextureMode: 0
+--- !u!114 &28834500521074391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0138e415fc4e0c94081ad1fcb661b240, type: 3}
+  m_Name: ScreenSpaceReflectionURP
+  m_EditorClassIdentifier: Assembly-CSharp::ScreenSpaceReflectionURP
+  m_Active: 1
+  material: {fileID: 2100000, guid: 64715458cb15add49987ae4b2e752210, type: 2}
+  sceneView: 0
 --- !u!114 &367515877368583667
 MonoBehaviour:
   m_ObjectHideFlags: 0

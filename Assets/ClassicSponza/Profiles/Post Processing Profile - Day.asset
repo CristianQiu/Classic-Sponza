@@ -335,6 +335,7 @@ MonoBehaviour:
   - {fileID: -3613994105213751816}
   - {fileID: 418601321837692123}
   - {fileID: 1416517696210120548}
+  - {fileID: 7748291957910333824}
 --- !u!114 &418601321837692123
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -428,16 +429,16 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: 1
   APVContribution:
-    m_OverrideState: 1
-    m_Value: 0
-  APVContributionWeight:
     m_OverrideState: 0
-    m_Value: 0.5
-  reflectionProbesContribution:
+    m_Value: 1
+  APVContributionWeight:
     m_OverrideState: 1
     m_Value: 1
+  reflectionProbesContribution:
+    m_OverrideState: 1
+    m_Value: 0
   reflectionProbesContributionWeight:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0.1
   noiseMode:
     m_OverrideState: 1
@@ -835,6 +836,46 @@ MonoBehaviour:
     m_Value: 2.5
     min: -100
     max: 100
+--- !u!114 &7748291957910333824
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5cf581a29a01ac44b68486e5025db52, type: 3}
+  m_Name: ScreenSpaceReflection
+  m_EditorClassIdentifier: Assembly-CSharp::ScreenSpaceReflection
+  active: 1
+  state:
+    m_OverrideState: 1
+    m_Value: 1
+  minSmoothness:
+    m_OverrideState: 1
+    m_Value: 0.2
+  fadeSmoothness:
+    m_OverrideState: 1
+    m_Value: 1
+  edgeFade:
+    m_OverrideState: 1
+    m_Value: 0.5
+  thicknessMode:
+    m_OverrideState: 0
+    m_Value: 0
+  thickness:
+    m_OverrideState: 1
+    m_Value: 0.25
+  quality:
+    m_OverrideState: 1
+    m_Value: 3
+  maxStep:
+    m_OverrideState: 1
+    m_Value: 128
+  accumFactor:
+    m_OverrideState: 1
+    m_Value: 1
 --- !u!114 &7782781064410867858
 MonoBehaviour:
   m_ObjectHideFlags: 3

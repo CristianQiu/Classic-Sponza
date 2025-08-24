@@ -28,8 +28,6 @@ Shader "Hidden/Lighting/ScreenSpaceReflection"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 			#include "Packages/com.unity.render-pipelines.core/Runtime/Utilities/Blit.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/DeclareOpaqueTexture.hlsl"
-			// The Blit.hlsl file provides the vertex shader (Vert),
-			// input structure (Attributes) and output strucutre (Varyings)
 			
 			#pragma vertex Vert
 			#pragma fragment frag
@@ -60,8 +58,6 @@ Shader "Hidden/Lighting/ScreenSpaceReflection"
 			{
 				UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(input);
 				float2 screenUV = input.texcoord;
-				// float x = screenUV.x - 1.0;
-				// screenUV = float2(x, screenUV.y);
 
 				float depth = SAMPLE_TEXTURE2D_X_LOD(_CameraDepthTexture, sampler_CameraDepthTexture, screenUV, 0).r;
 				
@@ -133,8 +129,6 @@ Shader "Hidden/Lighting/ScreenSpaceReflection"
 			HLSLPROGRAM
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/DeclareOpaqueTexture.hlsl"
-			// The Blit.hlsl file provides the vertex shader (Vert),
-			// input structure (Attributes) and output strucutre (Varyings)
 			#include "Packages/com.unity.render-pipelines.core/Runtime/Utilities/Blit.hlsl"
 			
 			#pragma vertex Vert
@@ -144,14 +138,11 @@ Shader "Hidden/Lighting/ScreenSpaceReflection"
 			
 			#pragma target 3.5
 			
-			// Camera or Per Object motion vectors.
-			TEXTURE2D_X(_MotionVectorTexture);
-			float4 _MotionVectorTexture_TexelSize;
+			// TEXTURE2D_X(_MotionVectorTexture);
+			// float4 _MotionVectorTexture_TexelSize;
 			
-			// Previous frame reflection color
-			TEXTURE2D_X(_ScreenSpaceReflectionHistoryTexture);
+			// TEXTURE2D_X(_ScreenSpaceReflectionHistoryTexture);
 			
-			// Store hitUV.xy and fresnel.z
 			TEXTURE2D_X(_ScreenSpaceReflectionHitTexture);
 			
 			CBUFFER_START(UnityPerMaterial)
@@ -168,15 +159,12 @@ Shader "Hidden/Lighting/ScreenSpaceReflection"
 			CBUFFER_END
 			
 			#include "./ScreenSpaceReflection.hlsl"
-			#include "./TemporalAccumulation.hlsl"
+			//#include "./TemporalAccumulation.hlsl"
 			
 			half4 frag(Varyings input) : SV_Target
 			{
 				UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(input);
 				float2 screenUV = input.texcoord;
-				float x = screenUV.x % 1.0;
-				screenUV = float2(x, screenUV.y);
-				
 				float depth = SAMPLE_TEXTURE2D_X_LOD(_CameraDepthTexture, sampler_CameraDepthTexture, screenUV, 0).r;
 				
 			#if !UNITY_REVERSED_Z
@@ -226,8 +214,6 @@ Shader "Hidden/Lighting/ScreenSpaceReflection"
 			HLSLPROGRAM
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/DeclareOpaqueTexture.hlsl"
-			// The Blit.hlsl file provides the vertex shader (Vert),
-			// input structure (Attributes) and output strucutre (Varyings)
 			#include "Packages/com.unity.render-pipelines.core/Runtime/Utilities/Blit.hlsl"
 			
 			#pragma vertex Vert
@@ -237,14 +223,11 @@ Shader "Hidden/Lighting/ScreenSpaceReflection"
 			
 			#pragma target 3.5
 			
-			// Camera or Per Object motion vectors.
 			TEXTURE2D(_MotionVectorTexture);
 			float4 _MotionVectorTexture_TexelSize;
 			
-			// Previous frame reflection color
 			TEXTURE2D(_ScreenSpaceReflectionHistoryTexture);
 			
-			// Store hitUV.xy and fresnel.z
 			TEXTURE2D(_ScreenSpaceReflectionHitTexture);
 			
 			CBUFFER_START(UnityPerMaterial)
@@ -337,33 +320,33 @@ Shader "Hidden/Lighting/ScreenSpaceReflection"
 		}
 
 		
-		Pass
-        {
-            Name "asd"
+		// Pass
+  //       {
+  //           Name "asd"
             
-            ZTest Always
-            ZWrite Off
-            Cull Off
-            Blend Off
+  //           ZTest Always
+  //           ZWrite Off
+  //           Cull Off
+  //           Blend Off
 
-            HLSLPROGRAM
+  //           HLSLPROGRAM
 
-            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
-            #include "Packages/com.unity.render-pipelines.core/Runtime/Utilities/Blit.hlsl"
+  //           #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+  //           #include "Packages/com.unity.render-pipelines.core/Runtime/Utilities/Blit.hlsl"
 
-            #pragma target 4.5
+  //           #pragma target 4.5
 
-            #pragma vertex Vert
-            #pragma fragment Frag
+  //           #pragma vertex Vert
+  //           #pragma fragment Frag
 
-            float4 Frag(Varyings input) : SV_Target
-            {
-                UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(input);
+  //           float4 Frag(Varyings input) : SV_Target
+  //           {
+  //               UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(input);
 
-                return SAMPLE_TEXTURE2D_X(_BlitTexture, sampler_LinearClamp, input.texcoord);
-            }
+  //               return SAMPLE_TEXTURE2D_X(_BlitTexture, sampler_LinearClamp, input.texcoord);
+  //           }
 
-            ENDHLSL
-        }
+  //           ENDHLSL
+  //       }
     }
 }

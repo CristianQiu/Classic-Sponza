@@ -79,7 +79,7 @@ public class ForwardGBufferPass : ScriptableRenderPass
 			builder.SetRenderAttachment(textureHandles.gBuffer0, 0);
 			builder.SetRenderAttachment(textureHandles.gBuffer1, 1);
 			builder.SetRenderAttachment(textureHandles.gBuffer2, 2);
-			//builder.SetRenderAttachmentDepth(textureHandles.gBufferDepth, AccessFlags.Read);
+			builder.SetRenderAttachmentDepth(textureHandles.gBufferDepth);
 
 			passData.rendererListHandle = CreateRendererList(renderGraph, renderingData, cameraData, resourceData);
 			builder.UseRendererList(passData.rendererListHandle);
@@ -95,6 +95,8 @@ public class ForwardGBufferPass : ScriptableRenderPass
 
 	#endregion
 
+	#region Methods
+
 	/// <summary>
 	/// Executes the pass with the information from the pass data.
 	/// </summary>
@@ -106,39 +108,7 @@ public class ForwardGBufferPass : ScriptableRenderPass
 	}
 
 	/// <summary>
-	/// Gets the graphics format for the GBuffer index. From URP Package/Runtime/DeferredLights.cs.
-	/// </summary>
-	/// <param name="index"></param>
-	/// <returns></returns>
-	private GraphicsFormat GetGBufferFormat(int index)
-	{
-		GraphicsFormat format = GraphicsFormat.None;
-
-		switch (index)
-		{
-			case 0:
-				// sRGB albedo, materialFlags.
-				format = QualitySettings.activeColorSpace == ColorSpace.Linear ? GraphicsFormat.R8G8B8A8_SRGB : GraphicsFormat.R8G8B8A8_UNorm;
-				break;
-			case 1:
-				// sRGB specular, occlusion.
-				format = GraphicsFormat.R8G8B8A8_UNorm;
-				break;
-			case 2:
-				// Normal, normal, normal, packedSmoothness.
-				// NormalWS range is -1.0 to 1.0, so we need a signed render texture.
-				if (SystemInfo.IsFormatSupported(GraphicsFormat.R8G8B8A8_SNorm, GraphicsFormatUsage.Render))
-					format = GraphicsFormat.R8G8B8A8_SNorm;
-				else
-					format = GraphicsFormat.R16G16B16A16_SFloat;
-				break;
-		}
-
-		return format;
-	}
-
-	/// <summary>
-	/// Creates and returns all the necessary render graph textures.
+	/// Creates and returns all the necessary render graph texture handles.
 	/// </summary>
 	/// <param name="renderGraph"></param>
 	/// <param name="renderingData"></param>
@@ -169,9 +139,10 @@ public class ForwardGBufferPass : ScriptableRenderPass
 		gBufferDesc.format = GetGBufferFormat(2);
 		textureHandles.gBuffer2 = renderGraph.CreateTexture(gBufferDesc);
 
+		// GBuffer depth.
 		//TextureDesc gBufferDepthDesc = renderGraph.GetTextureDesc(resourceData.cameraDepth);
 		//gBufferDepthDesc.name = "_GBufferDepth";
-		//gBufferDepthDesc.clearBuffer = false;
+		//gBufferDepthDesc.clearBuffer = true;
 		//gBufferDepthDesc.msaaSamples = MSAASamples.None;
 		//textureHandles.gBufferDepth = renderGraph.CreateTexture(gBufferDepthDesc);
 
@@ -188,6 +159,7 @@ public class ForwardGBufferPass : ScriptableRenderPass
 		//desc.stencilFormat = GraphicsFormat.None;
 		//desc.msaaSamples = 1;
 		//RenderingUtils.ReAllocateIfNeeded(ref gBuffer0, desc, FilterMode.Point, TextureWrapMode.Clamp, name: "_GBuffer0");
+
 		// If _CameraNormalsTexture exists, lacking smoothness information, set the target to it instead of creating a new RT.
 		//if (normalsTextureFieldInfo.GetValue(renderingData.cameraData.renderer) is not RTHandle normalsTextureHandle || renderingData.cameraData.cameraType == CameraType.SceneView) // There're a problem (wrong render target) of reusing normals texture in scene view.
 		//{
@@ -209,7 +181,39 @@ public class ForwardGBufferPass : ScriptableRenderPass
 	}
 
 	/// <summary>
-	/// Creates the renderer list to render opaque objects into the GBuffer.
+	/// Gets the graphics format for the GBuffer index. From URP Package/Runtime/DeferredLights.cs.
+	/// </summary>
+	/// <param name="index"></param>
+	/// <returns></returns>
+	private GraphicsFormat GetGBufferFormat(int index)
+	{
+		GraphicsFormat format = GraphicsFormat.None;
+
+		switch (index)
+		{
+			case 0:
+				// sRGB albedo, materialFlags.
+				format = QualitySettings.activeColorSpace == ColorSpace.Linear ? GraphicsFormat.R8G8B8A8_SRGB : GraphicsFormat.R8G8B8A8_UNorm;
+				break;
+			case 1:
+				// sRGB specular, occlusion.
+				format = GraphicsFormat.R8G8B8A8_UNorm;
+				break;
+			case 2:
+				// Normal, normal, normal, packedSmoothness. NormalWS range is -1.0 to 1.0, so we
+				// need a signed render texture.
+				if (SystemInfo.IsFormatSupported(GraphicsFormat.R8G8B8A8_SNorm, GraphicsFormatUsage.Render))
+					format = GraphicsFormat.R8G8B8A8_SNorm;
+				else
+					format = GraphicsFormat.R16G16B16A16_SFloat;
+				break;
+		}
+
+		return format;
+	}
+
+	/// <summary>
+	/// Creates the renderer list handle to render opaque objects into the GBuffer.
 	/// </summary>
 	/// <param name="renderGraph"></param>
 	/// <param name="renderingData"></param>
@@ -233,7 +237,7 @@ public class ForwardGBufferPass : ScriptableRenderPass
 	}
 
 	/// <summary>
-	/// Gets the render stat block to create the renderer list handle.
+	/// Gets the render state block to create the renderer list handle.
 	/// </summary>
 	/// <param name="renderGraph"></param>
 	/// <param name="cameraData"></param>
@@ -245,11 +249,9 @@ public class ForwardGBufferPass : ScriptableRenderPass
 		RenderStateBlock renderStateBlock = new RenderStateBlock(RenderStateMask.Nothing);
 
 		// Reduce GBuffer overdraw using the depth from opaque pass, excluding OpenGL platforms.
-		TextureDesc depthDesc = renderGraph.GetTextureDesc(resourceData.cameraDepthTexture); // depth or depth texture
+		TextureDesc depthDesc = renderGraph.GetTextureDesc(resourceData.cameraDepth);
 		bool noMsaa = depthDesc.msaaSamples == MSAASamples.None;
-		// noMsaa = !cameraData.renderer.cameraDepthTargetHandle.isMSAAEnabled
 
-		// TODO: CAMERA OPAQUE TEXTURE ENABLED MESSES WITH THIS
 		if ((cameraData.renderType == CameraRenderType.Base || depthDesc.clearBuffer) && noMsaa && !IsOpenGL())
 		{
 			renderStateBlock.depthState = new DepthState(false, CompareFunction.Equal);
@@ -257,6 +259,7 @@ public class ForwardGBufferPass : ScriptableRenderPass
 		}
 		else if (renderStateBlock.depthState.compareFunction == CompareFunction.Equal)
 		{
+			// TODO: This code path has not been tested.
 			renderStateBlock.depthState = new DepthState(true, CompareFunction.LessEqual);
 			renderStateBlock.mask |= RenderStateMask.Depth;
 		}
@@ -272,6 +275,8 @@ public class ForwardGBufferPass : ScriptableRenderPass
 	{
 		return SystemInfo.graphicsDeviceType == GraphicsDeviceType.OpenGLES3 || SystemInfo.graphicsDeviceType == GraphicsDeviceType.OpenGLCore;
 	}
+
+	#endregion
 
 	#region DEPRECATED
 
@@ -315,41 +320,31 @@ public class ForwardGBufferPass : ScriptableRenderPass
 	//	desc.stencilFormat = GraphicsFormat.None;
 	//	desc.msaaSamples = 1; // Do not enable MSAA for GBuffers.
 
-	//	// Albedo.rgb + MaterialFlags.a
-	//	desc.graphicsFormat = GetGBufferFormat(0);
-	//	RenderingUtils.ReAllocateIfNeeded(ref gBuffer0, desc, FilterMode.Point, TextureWrapMode.Clamp, name: "_GBuffer0");
-	//	cmd.SetGlobalTexture("_GBuffer0", gBuffer0);
+	// // Albedo.rgb + MaterialFlags.a desc.graphicsFormat = GetGBufferFormat(0);
+	// RenderingUtils.ReAllocateIfNeeded(ref gBuffer0, desc, FilterMode.Point,
+	// TextureWrapMode.Clamp, name: "_GBuffer0"); cmd.SetGlobalTexture("_GBuffer0", gBuffer0);
 
-	//	// Specular.rgb + Occlusion.a
-	//	desc.graphicsFormat = GetGBufferFormat(1);
-	//	RenderingUtils.ReAllocateIfNeeded(ref gBuffer1, desc, FilterMode.Point, TextureWrapMode.Clamp, name: "_GBuffer1");
-	//	cmd.SetGlobalTexture("_GBuffer1", gBuffer1);
+	// // Specular.rgb + Occlusion.a desc.graphicsFormat = GetGBufferFormat(1);
+	// RenderingUtils.ReAllocateIfNeeded(ref gBuffer1, desc, FilterMode.Point,
+	// TextureWrapMode.Clamp, name: "_GBuffer1"); cmd.SetGlobalTexture("_GBuffer1", gBuffer1);
 
-	//	// If "_CameraNormalsTexture" exists (lacking smoothness info), set the target to it
-	//	// instead of creating a new RT.
-	//	if (normalsTextureFieldInfo.GetValue(renderingData.cameraData.renderer) is not RTHandle normalsTextureHandle || renderingData.cameraData.cameraType == CameraType.SceneView) // There're a problem (wrong render target) of reusing normals texture in scene view.
-	//	{
-	//		// NormalWS.rgb + Smoothness.a
-	//		desc.graphicsFormat = GetGBufferFormat(2);
-	//		RenderingUtils.ReAllocateIfNeeded(ref gBuffer2, desc, FilterMode.Point, TextureWrapMode.Clamp, name: "_GBuffer2");
-	//		cmd.SetGlobalTexture("_GBuffer2", gBuffer2);
-	//		gBuffers = new RTHandle[] { gBuffer0, gBuffer1, gBuffer2 };
-	//	}
-	//	else
-	//	{
-	//		cmd.SetGlobalTexture("_GBuffer2", normalsTextureHandle);
-	//		gBuffers = new RTHandle[] { gBuffer0, gBuffer1, normalsTextureHandle };
-	//	}
+	// // If "_CameraNormalsTexture" exists (lacking smoothness info), set the target to it //
+	// instead of creating a new RT. if
+	// (normalsTextureFieldInfo.GetValue(renderingData.cameraData.renderer) is not RTHandle
+	// normalsTextureHandle || renderingData.cameraData.cameraType == CameraType.SceneView) //
+	// There're a problem (wrong render target) of reusing normals texture in scene view. { //
+	// NormalWS.rgb + Smoothness.a desc.graphicsFormat = GetGBufferFormat(2);
+	// RenderingUtils.ReAllocateIfNeeded(ref gBuffer2, desc, FilterMode.Point,
+	// TextureWrapMode.Clamp, name: "_GBuffer2"); cmd.SetGlobalTexture("_GBuffer2", gBuffer2);
+	// gBuffers = new RTHandle[] { gBuffer0, gBuffer1, gBuffer2 }; } else {
+	// cmd.SetGlobalTexture("_GBuffer2", normalsTextureHandle); gBuffers = new RTHandle[] {
+	// gBuffer0, gBuffer1, normalsTextureHandle }; }
 
-	//	if (renderingData.cameraData.renderer.cameraDepthTargetHandle.isMSAAEnabled)
-	//	{
-	//		RenderTextureDescriptor depthDesc = renderingData.cameraData.cameraTargetDescriptor;
-	//		depthDesc.msaaSamples = 1;
-	//		RenderingUtils.ReAllocateIfNeeded(ref gBufferDepth, depthDesc, FilterMode.Point, TextureWrapMode.Clamp, name: "_GBuffersDepthTexture");
-	//		ConfigureTarget(gBuffers, gBufferDepth);
-	//	}
-	//	else
-	//		ConfigureTarget(gBuffers, renderingData.cameraData.renderer.cameraDepthTargetHandle);
+	// if (renderingData.cameraData.renderer.cameraDepthTargetHandle.isMSAAEnabled) {
+	// RenderTextureDescriptor depthDesc = renderingData.cameraData.cameraTargetDescriptor;
+	// depthDesc.msaaSamples = 1; RenderingUtils.ReAllocateIfNeeded(ref gBufferDepth, depthDesc,
+	// FilterMode.Point, TextureWrapMode.Clamp, name: "_GBuffersDepthTexture");
+	// ConfigureTarget(gBuffers, gBufferDepth); } else ConfigureTarget(gBuffers, renderingData.cameraData.renderer.cameraDepthTargetHandle);
 
 	//	// [OpenGL] Reusing the depth buffer seems to cause black glitching artifacts, so clear
 	//	// the existing depth.
@@ -366,29 +361,26 @@ public class ForwardGBufferPass : ScriptableRenderPass
 	//{
 	//	SortingCriteria sortingCriteria = renderingData.cameraData.defaultOpaqueSortFlags;
 
-	//	RenderStateBlock renderStateBlock = new(RenderStateMask.Nothing);
-	//	bool isOpenGL = (SystemInfo.graphicsDeviceType == GraphicsDeviceType.OpenGLES3) || (SystemInfo.graphicsDeviceType == GraphicsDeviceType.OpenGLCore); // GLES 2 is removed.
+	// RenderStateBlock renderStateBlock = new(RenderStateMask.Nothing); bool isOpenGL =
+	// (SystemInfo.graphicsDeviceType == GraphicsDeviceType.OpenGLES3) ||
+	// (SystemInfo.graphicsDeviceType == GraphicsDeviceType.OpenGLCore); // GLES 2 is removed.
 
-	//	// Reduce GBuffer overdraw using the depth from opaque pass. (excluding OpenGL platforms)
-	//	if (!isOpenGL && (renderingData.cameraData.renderType == CameraRenderType.Base || renderingData.cameraData.clearDepth) && !renderingData.cameraData.renderer.cameraDepthTargetHandle.isMSAAEnabled)
-	//	{
-	//		renderStateBlock.depthState = new DepthState(false, CompareFunction.Equal);
-	//		renderStateBlock.mask |= RenderStateMask.Depth;
-	//	}
-	//	else if (renderStateBlock.depthState.compareFunction == CompareFunction.Equal)
-	//	{
-	//		renderStateBlock.depthState = new DepthState(true, CompareFunction.LessEqual);
-	//		renderStateBlock.mask |= RenderStateMask.Depth;
-	//	}
+	// // Reduce GBuffer overdraw using the depth from opaque pass. (excluding OpenGL platforms) if
+	// (!isOpenGL && (renderingData.cameraData.renderType == CameraRenderType.Base ||
+	// renderingData.cameraData.clearDepth) &&
+	// !renderingData.cameraData.renderer.cameraDepthTargetHandle.isMSAAEnabled) {
+	// renderStateBlock.depthState = new DepthState(false, CompareFunction.Equal);
+	// renderStateBlock.mask |= RenderStateMask.Depth; } else if
+	// (renderStateBlock.depthState.compareFunction == CompareFunction.Equal) {
+	// renderStateBlock.depthState = new DepthState(true, CompareFunction.LessEqual);
+	// renderStateBlock.mask |= RenderStateMask.Depth; }
 
-	//	CommandBuffer cmd = CommandBufferPool.Get();
-	//	using (new ProfilingScope(cmd, profilingSampler))
-	//	{
-	//		RendererListDesc rendererListDesc = new(new ShaderTagId("UniversalGBuffer"), renderingData.cullResults, renderingData.cameraData.camera);
-	//		rendererListDesc.stateBlock = renderStateBlock;
-	//		rendererListDesc.sortingCriteria = sortingCriteria;
-	//		rendererListDesc.renderQueueRange = RenderQueueRange.opaque;
-	//		RendererList rendererList = context.CreateRendererList(rendererListDesc);
+	// CommandBuffer cmd = CommandBufferPool.Get(); using (new ProfilingScope(cmd,
+	// profilingSampler)) { RendererListDesc rendererListDesc = new(new
+	// ShaderTagId("UniversalGBuffer"), renderingData.cullResults, renderingData.cameraData.camera);
+	// rendererListDesc.stateBlock = renderStateBlock; rendererListDesc.sortingCriteria =
+	// sortingCriteria; rendererListDesc.renderQueueRange = RenderQueueRange.opaque; RendererList
+	// rendererList = context.CreateRendererList(rendererListDesc);
 
 	//		cmd.DrawRendererList(rendererList);
 	//	}

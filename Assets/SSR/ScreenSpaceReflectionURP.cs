@@ -29,11 +29,7 @@ public class ScreenSpaceReflectionURP : ScriptableRendererFeature
 	[Header("Setup")]
 	[Tooltip("The post-processing material of screen space reflection.")]
 	public Material material;
-	[Tooltip("Enable this to execute SSR in Rendering Debugger view. This is disabled by default to avoid affecting the individual lighting previews.")]
-	public bool renderingDebugger = false;
-	[Header("Performance")]
-	//[Tooltip("The resolution of screen space ray marching.")]
-	//public Resolution resolution = Resolution.Full;
+
 	[Header("PBR Accumulation")]
 	[Tooltip("Enable this to denoise SSR at anytime in SceneView. This is disabled by default because URP SceneView only updates motion vectors in play mode.")]
 	public bool sceneView = false;
@@ -55,15 +51,8 @@ public class ScreenSpaceReflectionURP : ScriptableRendererFeature
 		set { material = (value.shader == Shader.Find(ssrShaderName)) ? value : material; }
 	}
 
-	public bool RenderingDebugger
-	{
-		get { return renderingDebugger; }
-		set { renderingDebugger = value; }
-	}
-
 	public override void Create()
 	{
-		// Check if the screen space reflection material uses the correct shader.
 		if (material != null)
 		{
 			if (material.shader != Shader.Find(ssrShaderName))
@@ -121,12 +110,11 @@ public class ScreenSpaceReflectionURP : ScriptableRendererFeature
 		isMotionValid = sceneView || UnityEditor.EditorApplication.isPlaying || renderingData.cameraData.camera.cameraType != CameraType.SceneView;
 #endif
 
-		if (renderingData.cameraData.camera.cameraType != CameraType.Preview && isActive && (!isDebugger || renderingDebugger))
+		if (renderingData.cameraData.camera.cameraType != CameraType.Preview && isActive && (!isDebugger /*|| renderingDebugger*/))
 		{
 			if (!isUsingDeferred || isOpenGL) 
-			{ 
 				renderer.EnqueuePass(forwardGBufferPass);
-			}
+
 			screenSpaceReflectionPass.isMotionValid = isMotionValid;
 //#if UNITY_2023_2_OR_NEWER
 			// [PBR Accumulation] Looks like there's a bug with the queue of URP's final blit pass
@@ -135,10 +123,8 @@ public class ScreenSpaceReflectionURP : ScriptableRendererFeature
 			// probably there will be more injection points available in URP, which makes PBR
 			// Accumulation more useful.
 			//screenSpaceReflectionPass.renderPassEvent = ssrVolume.accumFactor.value == 0.0f ? RenderPassEvent.BeforeRenderingPostProcessing : (renderingData.cameraData.camera.cameraType != CameraType.SceneView && renderingData.cameraData.camera.GetComponent<UniversalAdditionalCameraData>().antialiasing == AntialiasingMode.FastApproximateAntialiasing) ? RenderPassEvent.AfterRenderingPostProcessing - 1 : RenderPassEvent.AfterRenderingPostProcessing;
-			
-			screenSpaceReflectionPass.AddRenderPass();
-			screenSpaceReflectionPass.renderPassEvent = RenderPassEvent.BeforeRenderingPostProcessing;
 //#endif
+			screenSpaceReflectionPass.AddRenderPass();
 			renderer.EnqueuePass(screenSpaceReflectionPass);
 			isLogPrinted = false;
 		}

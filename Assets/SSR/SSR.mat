@@ -25,15 +25,15 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
-    - _AccumulationFactor: 0.75
-    - _DownSample: 1
-    - _EdgeFade: 0.1
-    - _FadeSmoothness: 0.6
-    - _MaxStep: 16
-    - _MinSmoothness: 0.4
+    - _AccumulationFactor: 1
+    - _DownSample: 0.5
+    - _EdgeFade: 0.5
+    - _FadeSmoothness: 1
+    - _MaxStep: 128
+    - _MinSmoothness: 0.2
     - _Seed: 0
-    - _StepSize: 0.4
-    - _StepSizeMultiplier: 1.33
+    - _StepSize: 0.2
+    - _StepSizeMultiplier: 1.1
     - _Thickness: 0.25
     m_Colors: []
   m_BuildTextureStacks: []
