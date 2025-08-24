@@ -4,5 +4,9 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/ClassicSponza/Scenes/SponzaLightingDay.unity
+    guid: 1f723c2a8ef1a402088abe23e02de660
   m_configObjects: {}
+  m_UseUCBPForAssetBundles: 0

@@ -50,6 +50,18 @@ MonoBehaviour:
   attenuationDistance:
     m_OverrideState: 1
     m_Value: 128
+  enableAPVContribution:
+    m_OverrideState: 1
+    m_Value: 0
+  APVContributionWeight:
+    m_OverrideState: 1
+    m_Value: 0.5
+  enableReflectionProbesContribution:
+    m_OverrideState: 1
+    m_Value: 0
+  reflectionProbesContributionWeight:
+    m_OverrideState: 1
+    m_Value: 0.1
   enableMainLightContribution:
     m_OverrideState: 1
     m_Value: 0
@@ -65,6 +77,24 @@ MonoBehaviour:
   enableAdditionalLightsContribution:
     m_OverrideState: 1
     m_Value: 0
+  enableNoise:
+    m_OverrideState: 1
+    m_Value: 0
+  noiseTexture:
+    m_OverrideState: 1
+    m_Value: {fileID: 0}
+  noiseStrength:
+    m_OverrideState: 1
+    m_Value: 1
+  noiseSize:
+    m_OverrideState: 1
+    m_Value: 1
+  noiseSpeeds:
+    m_OverrideState: 1
+    m_Value: {x: 0, y: 0, z: 0}
+  resolution:
+    m_OverrideState: 1
+    m_Value: 2
   maxSteps:
     m_OverrideState: 1
     m_Value: 128
@@ -659,6 +689,25 @@ MonoBehaviour:
   clamp:
     m_OverrideState: 1
     m_Value: 0.05
+--- !u!114 &-912680511913493629
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6bdc45ca7e77154ba80c8c0eaff32ac, type: 3}
+  m_Name: CameraFadeVolumeComponent
+  m_EditorClassIdentifier: 
+  active: 1
+  color:
+    m_OverrideState: 1
+    m_Value: {r: 0, g: 0, b: 0, a: 1}
+  progress:
+    m_OverrideState: 1
+    m_Value: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -693,6 +742,7 @@ MonoBehaviour:
   - {fileID: -2116772270198954743}
   - {fileID: -7277375777826075486}
   - {fileID: 4874567631048333469}
+  - {fileID: -912680511913493629}
 --- !u!114 &144899795695697735
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -807,6 +857,18 @@ MonoBehaviour:
   attenuationDistance:
     m_OverrideState: 1
     m_Value: 128
+  enableAPVContribution:
+    m_OverrideState: 1
+    m_Value: 0
+  APVContributionWeight:
+    m_OverrideState: 0
+    m_Value: 1
+  enableReflectionProbesContribution:
+    m_OverrideState: 1
+    m_Value: 0
+  reflectionProbesContributionWeight:
+    m_OverrideState: 0
+    m_Value: 0.1
   enableMainLightContribution:
     m_OverrideState: 1
     m_Value: 0
@@ -822,6 +884,24 @@ MonoBehaviour:
   enableAdditionalLightsContribution:
     m_OverrideState: 1
     m_Value: 0
+  enableNoise:
+    m_OverrideState: 1
+    m_Value: 0
+  noiseTexture:
+    m_OverrideState: 1
+    m_Value: {fileID: 0}
+  noiseStrength:
+    m_OverrideState: 0
+    m_Value: 1
+  noiseSize:
+    m_OverrideState: 0
+    m_Value: 1
+  noiseSpeeds:
+    m_OverrideState: 0
+    m_Value: {x: 0, y: 0, z: 0}
+  resolution:
+    m_OverrideState: 0
+    m_Value: 2
   maxSteps:
     m_OverrideState: 1
     m_Value: 128
