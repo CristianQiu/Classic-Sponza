@@ -7,97 +7,108 @@ using UnityEngine.Rendering.Universal;
 [Tooltip("Add this Renderer Feature to support screen space reflection in URP Volume.")]
 public class ScreenSpaceReflectionURP : ScriptableRendererFeature
 {
-	[Header("Setup")]
-	[Tooltip("The post-processing material of screen space reflection.")]
-	public Material material;
-
-	[Header("PBR Accumulation")]
-	[Tooltip("Enable this to denoise SSR at anytime in SceneView. This is disabled by default because URP SceneView only updates motion vectors in play mode.")]
-	public bool sceneView = false;
-
-	private const string ssrShaderName = "Hidden/Lighting/ScreenSpaceReflection";
-	private ScreenSpaceReflectionPass screenSpaceReflectionPass;
-	private ForwardGBufferPass forwardGBufferPass;
-
-	// Pirnt message only once when using the rendering debugger.
-	private bool isLogPrinted = false;
+	#region Private Attributes
 
 	// Render GBuffers in Forward path.
 	private static readonly FieldInfo renderingModeFieldInfo = typeof(UniversalRenderer).GetField("m_RenderingMode", BindingFlags.NonPublic | BindingFlags.Instance);
 	private static readonly FieldInfo normalsTextureFieldInfo = typeof(UniversalRenderer).GetField("m_NormalsTexture", BindingFlags.NonPublic | BindingFlags.Instance);
 
-	public Material SSRMaterial
-	{
-		get { return material; }
-		set { material = (value.shader == Shader.Find(ssrShaderName)) ? value : material; }
-	}
+	[HideInInspector]
+	[SerializeField] private Shader shader;
 
+	private Material material;
+
+	private ForwardGBufferPass forwardGBufferPass;
+	private ScreenSpaceReflectionPass screenSpaceReflectionPass;
+
+	#endregion
+
+	#region Methods
+
+	/// <summary>
+	/// <inheritdoc/>
+	/// </summary>
 	public override void Create()
 	{
-		if (material != null)
-		{
-			if (material.shader != Shader.Find(ssrShaderName))
-			{
-				Debug.LogErrorFormat("Screen Space Reflection URP: Material shader should be {0}.", ssrShaderName);
-				return;
-			}
-		}
-		else
-			return;
-
-		if (screenSpaceReflectionPass == null)
-		{
-			screenSpaceReflectionPass = new(material);
-			screenSpaceReflectionPass.renderPassEvent = RenderPassEvent.BeforeRenderingTransparents + 1;
-		}
-
-		if (forwardGBufferPass == null)
-		{
-			forwardGBufferPass = new();
-			forwardGBufferPass.renderPassEvent = RenderPassEvent.BeforeRenderingTransparents; // Depth Priming
-		}
+		ValidateResources(true);
+	
+		forwardGBufferPass = new ForwardGBufferPass();
+		screenSpaceReflectionPass = new ScreenSpaceReflectionPass(material);
 	}
 
-	protected override void Dispose(bool disposing)
-	{
-		screenSpaceReflectionPass?.Dispose();
-		forwardGBufferPass?.Dispose();
-	}
-
+	/// <summary>
+	/// <inheritdoc/>
+	/// </summary>
+	/// <param name="renderer"></param>
+	/// <param name="renderingData"></param>
 	public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData)
 	{
-		if (material == null)
-		{
-			Debug.LogErrorFormat("Screen Space Reflection URP: Post-processing material is empty.");
-			return;
-		}
+		bool isPostProcessEnabled = renderingData.postProcessingEnabled && renderingData.cameraData.postProcessEnabled;
+		bool addPass = isPostProcessEnabled && ShouldAddRenderPass(renderingData.cameraData.cameraType);
 
 		var renderingMode = (RenderingMode)renderingModeFieldInfo.GetValue(renderer as UniversalRenderer);
 		bool isUsingDeferred = (renderingMode != RenderingMode.Forward) && (renderingMode != RenderingMode.ForwardPlus);
 		if (isUsingDeferred)
 			return;
 
-		// URP forces Forward path on OpenGL platforms.
-		bool isOpenGL = (SystemInfo.graphicsDeviceType == GraphicsDeviceType.OpenGLES3) || (SystemInfo.graphicsDeviceType == GraphicsDeviceType.OpenGLCore); // GLES 2 is removed.
-
-		var stack = VolumeManager.instance.stack;
-		ScreenSpaceReflection ssrVolume = stack.GetComponent<ScreenSpaceReflection>();
-		bool isActive = ssrVolume != null && ssrVolume.IsActive();
-		bool isDebugger = DebugManager.instance.isAnyDebugUIActive;
-
-		if (renderingData.cameraData.camera.cameraType != CameraType.Preview && isActive && (!isDebugger /*|| renderingDebugger*/))
+		if (addPass && !isUsingDeferred)
 		{
-			if (!isUsingDeferred || isOpenGL) 
-				renderer.EnqueuePass(forwardGBufferPass);
+			// URP forces Forward path on OpenGL platforms.
+			// TODO: if opengl or deferred, queue gbuffer
+			//bool isOpenGL = (SystemInfo.graphicsDeviceType == GraphicsDeviceType.OpenGLES3) || (SystemInfo.graphicsDeviceType == GraphicsDeviceType.OpenGLCore);
 
 			screenSpaceReflectionPass.ConfigurePass();
+
+			renderer.EnqueuePass(forwardGBufferPass);
 			renderer.EnqueuePass(screenSpaceReflectionPass);
-			isLogPrinted = false;
-		}
-		else if (isDebugger && isLogPrinted == false)
-		{
-			Debug.Log("Screen Space Reflection URP: Disable effect to avoid affecting rendering debugging.");
-			isLogPrinted = true;
 		}
 	}
+
+	/// <summary>
+	/// <inheritdoc/>
+	/// </summary>
+	/// <param name="disposing"></param>
+	protected override void Dispose(bool disposing)
+	{
+		screenSpaceReflectionPass?.Dispose();
+		forwardGBufferPass?.Dispose();
+	}
+
+	/// <summary>
+	/// Validates the resources used by the render pass.
+	/// </summary>
+	/// <param name="forceRefresh"></param>
+	/// <returns></returns>
+	private bool ValidateResources(bool forceRefresh)
+	{
+		if (forceRefresh)
+		{
+#if UNITY_EDITOR
+			shader = Shader.Find("Hidden/Lighting/ScreenSpaceReflection");
+#endif
+			CoreUtils.Destroy(material);
+			material = CoreUtils.CreateEngineMaterial(shader);
+		}
+
+		return shader != null && material != null;
+	}
+
+	/// <summary>
+	/// Gets whether the render pass should be enqueued to the renderer.
+	/// </summary>
+	/// <param name="cameraType"></param>
+	/// <returns></returns>
+	private bool ShouldAddRenderPass(CameraType cameraType)
+	{
+		ScreenSpaceReflection volume = VolumeManager.instance.stack.GetComponent<ScreenSpaceReflection>();
+
+		bool isCameraOk = cameraType != CameraType.Preview && cameraType != CameraType.Reflection && cameraType != CameraType.SceneView;
+		bool areResourcesOk = ValidateResources(false);
+		bool isRenderPassOk = forwardGBufferPass != null && screenSpaceReflectionPass != null;
+		bool isFogVolumeOk = volume != null && volume.IsActive();
+
+		return isActive && isCameraOk && areResourcesOk && isRenderPassOk && isFogVolumeOk;
+	}
+
+	#endregion
 }

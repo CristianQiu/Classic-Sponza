@@ -52,6 +52,7 @@ public sealed class ForwardGBufferPass : ScriptableRenderPass
 	public ForwardGBufferPass()
 	{
 		profilingSampler = new ProfilingSampler("Forward GBuffer");
+		renderPassEvent = RenderPassEvent.BeforeRenderingTransparents;
 	}
 
 	#endregion

@@ -88,6 +88,7 @@ public sealed class ScreenSpaceReflectionPass : ScriptableRenderPass
 		profilingSampler = new ProfilingSampler("Screen Space Reflection");
 		ssrMaterial = material;
 		requiresIntermediateTexture = false;
+		renderPassEvent = RenderPassEvent.BeforeRenderingTransparents + 1;
 
 		InitPassesIndices();
 	}

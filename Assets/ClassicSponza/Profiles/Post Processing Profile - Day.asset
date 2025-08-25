@@ -15,31 +15,31 @@ MonoBehaviour:
   active: 1
   state:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1
   resolution:
     m_OverrideState: 1
-    m_Value: 2
+    m_Value: 4
   minSmoothness:
-    m_OverrideState: 0
-    m_Value: 0.33
+    m_OverrideState: 1
+    m_Value: 0.15
   fadeSmoothness:
-    m_OverrideState: 0
-    m_Value: 0.6
+    m_OverrideState: 1
+    m_Value: 0
   edgeFade:
     m_OverrideState: 1
-    m_Value: 0.1
+    m_Value: 0
   thickness:
     m_OverrideState: 1
     m_Value: 0.25
   quality:
-    m_OverrideState: 0
-    m_Value: 0
+    m_OverrideState: 1
+    m_Value: 3
   maxStep:
-    m_OverrideState: 0
-    m_Value: 16
+    m_OverrideState: 1
+    m_Value: 32
   accumFactor:
-    m_OverrideState: 0
-    m_Value: 0.75
+    m_OverrideState: 1
+    m_Value: 1
 --- !u!114 &-8681464401382013830
 MonoBehaviour:
   m_ObjectHideFlags: 3
