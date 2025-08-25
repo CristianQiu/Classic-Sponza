@@ -1,45 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8977832950068661590
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5cf581a29a01ac44b68486e5025db52, type: 3}
-  m_Name: ScreenSpaceReflection
-  m_EditorClassIdentifier: Assembly-CSharp::ScreenSpaceReflection
-  active: 1
-  state:
-    m_OverrideState: 1
-    m_Value: 1
-  resolution:
-    m_OverrideState: 1
-    m_Value: 4
-  minSmoothness:
-    m_OverrideState: 1
-    m_Value: 0.15
-  fadeSmoothness:
-    m_OverrideState: 1
-    m_Value: 0
-  edgeFade:
-    m_OverrideState: 1
-    m_Value: 0
-  thickness:
-    m_OverrideState: 1
-    m_Value: 0.25
-  quality:
-    m_OverrideState: 1
-    m_Value: 3
-  maxStep:
-    m_OverrideState: 1
-    m_Value: 32
-  accumFactor:
-    m_OverrideState: 1
-    m_Value: 1
 --- !u!114 &-8681464401382013830
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -194,7 +154,7 @@ MonoBehaviour:
   active: 1
   postExposure:
     m_OverrideState: 1
-    m_Value: 1.51
+    m_Value: 0.3
   contrast:
     m_OverrideState: 1
     m_Value: 0
@@ -374,8 +334,7 @@ MonoBehaviour:
   - {fileID: -8561978266364178982}
   - {fileID: -3613994105213751816}
   - {fileID: 418601321837692123}
-  - {fileID: 1416517696210120548}
-  - {fileID: -8977832950068661590}
+  - {fileID: 3986866853074021990}
 --- !u!114 &418601321837692123
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -422,112 +381,6 @@ MonoBehaviour:
   worldOffset:
     m_OverrideState: 0
     m_Value: {x: 0, y: 0, z: 0}
---- !u!114 &1416517696210120548
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a074ec59f6e910b4e8c49f57e56cf95a, type: 3}
-  m_Name: VolumetricFogVolumeComponent
-  m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricFogVolumeComponent
-  active: 1
-  distance:
-    m_OverrideState: 0
-    m_Value: 64
-  baseHeight:
-    m_OverrideState: 1
-    m_Value: 0
-  maximumHeight:
-    m_OverrideState: 1
-    m_Value: 50
-  groundHeight:
-    m_OverrideState: 0
-    m_Value: -100000
-  density:
-    m_OverrideState: 0
-    m_Value: 0.25
-  attenuationDistance:
-    m_OverrideState: 0
-    m_Value: 128
-  mainLightContribution:
-    m_OverrideState: 1
-    m_Value: 1
-  mainLightAnisotropy:
-    m_OverrideState: 0
-    m_Value: 0.4
-  mainLightScattering:
-    m_OverrideState: 0
-    m_Value: 0.75
-  mainLightTint:
-    m_OverrideState: 0
-    m_Value: {r: 1, g: 1, b: 1, a: 1}
-  additionalLightsContribution:
-    m_OverrideState: 1
-    m_Value: 1
-  APVContribution:
-    m_OverrideState: 1
-    m_Value: 0
-  APVContributionWeight:
-    m_OverrideState: 1
-    m_Value: 0
-  reflectionProbesContribution:
-    m_OverrideState: 1
-    m_Value: 0
-  reflectionProbesContributionWeight:
-    m_OverrideState: 1
-    m_Value: 0.1
-  noiseMode:
-    m_OverrideState: 1
-    m_Value: 0
-  noiseTexture:
-    m_OverrideState: 1
-    m_Value: {fileID: 0}
-  noiseScale:
-    m_OverrideState: 0
-    m_Value: 2.5
-  noiseMinMax:
-    m_OverrideState: 0
-    m_Value: {x: -0.75, y: 2.5}
-  noiseVelocity:
-    m_OverrideState: 0
-    m_Value: {x: 0.1, y: -0.15, z: -0.05}
-  distortionTexture:
-    m_OverrideState: 1
-    m_Value: {fileID: 0}
-  distortionScale:
-    m_OverrideState: 0
-    m_Value: 5
-  distortionIntensity:
-    m_OverrideState: 0
-    m_Value: {x: 0.1, y: -0.1, z: 0.05}
-  distortionVelocity:
-    m_OverrideState: 0
-    m_Value: {x: -0.02, y: 0.01, z: 0.015}
-  renderPassEvent:
-    m_OverrideState: 0
-    m_Value: 550
-  resolution:
-    m_OverrideState: 0
-    m_Value: 2
-  maximumSteps:
-    m_OverrideState: 0
-    m_Value: 24
-  minimumStepSize:
-    m_OverrideState: 0
-    m_Value: 0.25
-  blurIterations:
-    m_OverrideState: 0
-    m_Value: 2
-  reprojection:
-    m_OverrideState: 1
-    m_Value: 1
-  enabled:
-    m_OverrideState: 1
-    m_Value: 1
 --- !u!114 &2891247478753520741
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -618,6 +471,9 @@ MonoBehaviour:
   additionalLightsContribution:
     m_OverrideState: 1
     m_Value: 0
+  ambienceColor:
+    m_OverrideState: 0
+    m_Value: {r: 0, g: 0, b: 0, a: 1}
   APVContribution:
     m_OverrideState: 1
     m_Value: 0
@@ -675,6 +531,116 @@ MonoBehaviour:
   reprojection:
     m_OverrideState: 1
     m_Value: 0
+  enabled:
+    m_OverrideState: 1
+    m_Value: 1
+--- !u!114 &3986866853074021990
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a074ec59f6e910b4e8c49f57e56cf95a, type: 3}
+  m_Name: VolumetricFogVolumeComponent
+  m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricFogVolumeComponent
+  active: 1
+  distance:
+    m_OverrideState: 0
+    m_Value: 64
+  baseHeight:
+    m_OverrideState: 1
+    m_Value: 0
+  maximumHeight:
+    m_OverrideState: 1
+    m_Value: 7.34
+  groundHeight:
+    m_OverrideState: 0
+    m_Value: -100000
+  density:
+    m_OverrideState: 1
+    m_Value: 0.032
+  attenuationDistance:
+    m_OverrideState: 1
+    m_Value: 8.3
+  mainLightContribution:
+    m_OverrideState: 1
+    m_Value: 1
+  mainLightAnisotropy:
+    m_OverrideState: 0
+    m_Value: 0.4
+  mainLightScattering:
+    m_OverrideState: 0
+    m_Value: 0.75
+  mainLightTint:
+    m_OverrideState: 0
+    m_Value: {r: 1, g: 1, b: 1, a: 1}
+  additionalLightsContribution:
+    m_OverrideState: 1
+    m_Value: 1
+  ambienceColor:
+    m_OverrideState: 1
+    m_Value: {r: 0.18490559, g: 0.1571778, b: 0.14199354, a: 0.19215687}
+  APVContribution:
+    m_OverrideState: 1
+    m_Value: 0
+  APVContributionWeight:
+    m_OverrideState: 0
+    m_Value: 0.5
+  reflectionProbesContribution:
+    m_OverrideState: 1
+    m_Value: 1
+  reflectionProbesContributionWeight:
+    m_OverrideState: 1
+    m_Value: 0
+  noiseMode:
+    m_OverrideState: 1
+    m_Value: 2
+  noiseTexture:
+    m_OverrideState: 1
+    m_Value: {fileID: 11700000, guid: 1b2ce0e55e6d05040b5090820e513b15, type: 2}
+  noiseScale:
+    m_OverrideState: 0
+    m_Value: 2.5
+  noiseMinMax:
+    m_OverrideState: 1
+    m_Value: {x: -0.9811306, y: 2.5}
+  noiseVelocity:
+    m_OverrideState: 0
+    m_Value: {x: 0.1, y: -0.15, z: -0.05}
+  distortionTexture:
+    m_OverrideState: 1
+    m_Value: {fileID: -6434664791414598963, guid: 9759c5cc4f9b5f0429252ffc5a5841ec,
+      type: 2}
+  distortionScale:
+    m_OverrideState: 0
+    m_Value: 5
+  distortionIntensity:
+    m_OverrideState: 0
+    m_Value: {x: 0.1, y: -0.1, z: 0.05}
+  distortionVelocity:
+    m_OverrideState: 0
+    m_Value: {x: -0.02, y: 0.01, z: 0.015}
+  renderPassEvent:
+    m_OverrideState: 1
+    m_Value: 450
+  resolution:
+    m_OverrideState: 1
+    m_Value: 2
+  maximumSteps:
+    m_OverrideState: 1
+    m_Value: 128
+  minimumStepSize:
+    m_OverrideState: 1
+    m_Value: 0.2
+  blurIterations:
+    m_OverrideState: 1
+    m_Value: 1
+  reprojection:
+    m_OverrideState: 1
+    m_Value: 1
   enabled:
     m_OverrideState: 1
     m_Value: 1
@@ -1153,7 +1119,7 @@ MonoBehaviour:
   active: 1
   mode:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 2
   neutralHDRRangeReductionMode:
     m_OverrideState: 0
     m_Value: 2
