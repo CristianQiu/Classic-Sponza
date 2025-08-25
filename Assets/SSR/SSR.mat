@@ -28,12 +28,12 @@ Material:
     - _AccumulationFactor: 1
     - _DownSample: 0.5
     - _EdgeFade: 0.5
-    - _FadeSmoothness: 1
-    - _MaxStep: 128
-    - _MinSmoothness: 0.2
+    - _FadeSmoothness: 0.11
+    - _MaxStep: 32
+    - _MinSmoothness: 0.1
     - _Seed: 0
-    - _StepSize: 0.2
-    - _StepSizeMultiplier: 1.1
+    - _StepSize: 0.3
+    - _StepSizeMultiplier: 1.33
     - _Thickness: 0.25
     m_Colors: []
   m_BuildTextureStacks: []

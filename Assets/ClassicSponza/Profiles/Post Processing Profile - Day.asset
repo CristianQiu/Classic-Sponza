@@ -154,7 +154,7 @@ MonoBehaviour:
   active: 1
   postExposure:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 1.51
   contrast:
     m_OverrideState: 1
     m_Value: 0
@@ -429,11 +429,11 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: 1
   APVContribution:
-    m_OverrideState: 0
-    m_Value: 1
+    m_OverrideState: 1
+    m_Value: 0
   APVContributionWeight:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0
   reflectionProbesContribution:
     m_OverrideState: 1
     m_Value: 0
@@ -854,10 +854,10 @@ MonoBehaviour:
     m_Value: 1
   minSmoothness:
     m_OverrideState: 1
-    m_Value: 0.2
+    m_Value: 0.1
   fadeSmoothness:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0
   edgeFade:
     m_OverrideState: 1
     m_Value: 0.5
@@ -869,10 +869,10 @@ MonoBehaviour:
     m_Value: 0.25
   quality:
     m_OverrideState: 1
-    m_Value: 3
+    m_Value: 1
   maxStep:
     m_OverrideState: 1
-    m_Value: 128
+    m_Value: 48
   accumFactor:
     m_OverrideState: 1
     m_Value: 1
@@ -1153,7 +1153,7 @@ MonoBehaviour:
   active: 1
   mode:
     m_OverrideState: 1
-    m_Value: 2
+    m_Value: 1
   neutralHDRRangeReductionMode:
     m_OverrideState: 0
     m_Value: 2

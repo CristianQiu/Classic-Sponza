@@ -253,7 +253,6 @@ public class ScreenSpaceReflectionPass : ScriptableRenderPass
 
 		ssrMaterial.SetFloat("_FrameCount", Time.renderedFrameCount % 64);
 
-		// Set the parameters here to avoid using 4 shader keywords.
 		if (ssrVolume.quality.value == ScreenSpaceReflection.Quality.Low)
 		{
 			ssrMaterial.SetFloat(StepSizeId, 0.4f);

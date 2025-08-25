@@ -1274,7 +1274,7 @@ ReflectionProbe:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IntensityMultiplier: 0
+  m_IntensityMultiplier: 1
   m_BlendDistance: 0
   m_HDR: 1
   m_BoxProjection: 1
@@ -2195,11 +2195,11 @@ Light:
   m_Enabled: 1
   serializedVersion: 11
   m_Type: 0
-  m_Color: {r: 1, g: 0.5421028, b: 0.1490565, a: 1}
+  m_Color: {r: 1, g: 0.6347883, b: 0.3226415, a: 1}
   m_Intensity: 227.34
   m_Range: 13.6
-  m_SpotAngle: 157.99413
-  m_InnerSpotAngle: 13.658631
+  m_SpotAngle: 95.62802
+  m_InnerSpotAngle: 20.368576
   m_CookieSize: 10
   m_Shadows:
     m_Type: 2
@@ -2258,13 +2258,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 738853839}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.20847392, y: -0.6677469, z: 0.6639581, w: -0.2642205}
+  m_LocalRotation: {x: 0.35977143, y: -0.5959274, z: 0.58976525, w: -0.40940446}
   m_LocalPosition: {x: 0.786, y: 3.57, z: 6.989}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2052176212}
-  m_LocalEulerAnglesHint: {x: 50.945, y: -271.938, z: -87.144}
+  m_LocalEulerAnglesHint: {x: 24.1, y: -271.938, z: -87.144}
 --- !u!1 &816233373
 GameObject:
   m_ObjectHideFlags: 0
@@ -2338,11 +2338,11 @@ Light:
   m_Enabled: 1
   serializedVersion: 11
   m_Type: 0
-  m_Color: {r: 1, g: 0.5421028, b: 0.1490565, a: 1}
-  m_Intensity: 185.9
-  m_Range: 4.21
-  m_SpotAngle: 51.824013
-  m_InnerSpotAngle: 12.58032
+  m_Color: {r: 0.7617204, g: 0.4509434, b: 1, a: 1}
+  m_Intensity: 84.7
+  m_Range: 15.1
+  m_SpotAngle: 69.7966
+  m_InnerSpotAngle: 0
   m_CookieSize: 10
   m_Shadows:
     m_Type: 2
@@ -2401,13 +2401,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 816233373}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.022, y: 3.57, z: 1.031}
+  m_LocalRotation: {x: -0.63808554, y: 0.5776378, z: 0.055672098, w: -0.50604564}
+  m_LocalPosition: {x: -0.42, y: 3.841, z: 3.02}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2052176212}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 35.555, y: -126.3, z: -437.254}
 --- !u!114 &834994537
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2517,14 +2517,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 882968827}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.003673042, y: 0.99403715, z: -0.035427067, w: -0.10306105}
-  m_LocalPosition: {x: 0.1, y: 0.87, z: 4.89}
+  m_LocalRotation: {x: 0.035462085, y: 0.092398845, z: -0.0032928397, w: 0.99508494}
+  m_LocalPosition: {x: 0.1, y: 0.87, z: -8.03}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 42544241}
   m_Father: {fileID: 270823135}
-  m_LocalEulerAnglesHint: {x: 0, y: 199, z: 0}
+  m_LocalEulerAnglesHint: {x: 4.082, y: 10.61, z: 0}
 --- !u!114 &882968829
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2733,7 +2733,7 @@ ReflectionProbe:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IntensityMultiplier: 0
+  m_IntensityMultiplier: 1
   m_BlendDistance: 0.2
   m_HDR: 1
   m_BoxProjection: 1
@@ -2842,7 +2842,7 @@ ReflectionProbe:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IntensityMultiplier: 0
+  m_IntensityMultiplier: 1
   m_BlendDistance: 0.2
   m_HDR: 1
   m_BoxProjection: 1
@@ -3177,7 +3177,7 @@ ReflectionProbe:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IntensityMultiplier: 0
+  m_IntensityMultiplier: 1
   m_BlendDistance: 0
   m_HDR: 1
   m_BoxProjection: 1
@@ -3531,7 +3531,7 @@ ReflectionProbe:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IntensityMultiplier: 0
+  m_IntensityMultiplier: 1
   m_BlendDistance: 0.2
   m_HDR: 1
   m_BoxProjection: 1
@@ -3742,7 +3742,7 @@ ReflectionProbe:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IntensityMultiplier: 0
+  m_IntensityMultiplier: 1
   m_BlendDistance: 0.2
   m_HDR: 1
   m_BoxProjection: 1
@@ -3863,7 +3863,7 @@ ReflectionProbe:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IntensityMultiplier: 0
+  m_IntensityMultiplier: 1
   m_BlendDistance: 0.2
   m_HDR: 1
   m_BoxProjection: 1
@@ -3969,7 +3969,7 @@ Transform:
   m_GameObject: {fileID: 1476750862}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.97, y: 0.23, z: 1.54}
+  m_LocalPosition: {x: 0.97, y: 0.23, z: -2.33}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4511,6 +4511,11 @@ PrefabInstance:
     - target: {fileID: 1776318540999159787, guid: 6223f3d4240e9da44894ba390db60e68,
         type: 3}
       propertyPath: m_RenderingLayerMask
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1789319941016081136, guid: 6223f3d4240e9da44894ba390db60e68,
+        type: 3}
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1789319941016081136, guid: 6223f3d4240e9da44894ba390db60e68,
@@ -7508,7 +7513,7 @@ ReflectionProbe:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IntensityMultiplier: 0
+  m_IntensityMultiplier: 1
   m_BlendDistance: 0.2
   m_HDR: 1
   m_BoxProjection: 1
@@ -7702,7 +7707,7 @@ ReflectionProbe:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IntensityMultiplier: 0
+  m_IntensityMultiplier: 1
   m_BlendDistance: 0
   m_HDR: 1
   m_BoxProjection: 1
@@ -7767,7 +7772,7 @@ ReflectionProbe:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IntensityMultiplier: 0
+  m_IntensityMultiplier: 1
   m_BlendDistance: 0.2
   m_HDR: 1
   m_BoxProjection: 1
@@ -8147,7 +8152,7 @@ ReflectionProbe:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IntensityMultiplier: 0
+  m_IntensityMultiplier: 1
   m_BlendDistance: 0.2
   m_HDR: 1
   m_BoxProjection: 1
@@ -8255,7 +8260,7 @@ ReflectionProbe:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IntensityMultiplier: 0
+  m_IntensityMultiplier: 1
   m_BlendDistance: 0
   m_HDR: 1
   m_BoxProjection: 1
@@ -8504,7 +8509,7 @@ ReflectionProbe:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IntensityMultiplier: 0
+  m_IntensityMultiplier: 1
   m_BlendDistance: 0
   m_HDR: 1
   m_BoxProjection: 1
@@ -8569,7 +8574,7 @@ ReflectionProbe:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IntensityMultiplier: 0
+  m_IntensityMultiplier: 1
   m_BlendDistance: 0.2
   m_HDR: 1
   m_BoxProjection: 1
@@ -8619,7 +8624,7 @@ ReflectionProbe:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IntensityMultiplier: 0
+  m_IntensityMultiplier: 1
   m_BlendDistance: 0.2
   m_HDR: 1
   m_BoxProjection: 1
@@ -9020,7 +9025,7 @@ ReflectionProbe:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IntensityMultiplier: 0
+  m_IntensityMultiplier: 1
   m_BlendDistance: 0.2
   m_HDR: 1
   m_BoxProjection: 1

@@ -29,8 +29,6 @@ TEXTURE2D_X_HALF(_GBuffer0); // color.rgb + materialFlags.a
 TEXTURE2D_X_HALF(_GBuffer1); // specular.rgb + oclusion.a
 TEXTURE2D_X_HALF(_GBuffer2); // normalWS.rgb + smoothness.a
 
-SAMPLER(sampler_BlitTexture);
-
 uint UnpackMaterialFlags(float packedMaterialFlags)
 {
     return uint((packedMaterialFlags * 255.0h) + 0.5h);

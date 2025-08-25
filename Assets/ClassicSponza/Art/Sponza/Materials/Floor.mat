@@ -191,7 +191,7 @@ Material:
     - _Blend: 0
     - _BlendMode: 0
     - _BlendModePreserveSpecular: 1
-    - _BumpScale: 1
+    - _BumpScale: 0.1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
     - _CoatMask: 0
@@ -285,7 +285,7 @@ Material:
     - _SSRefractionProjectionModel: 0
     - _ShiverDirectionality: 0.5
     - _ShiverDrag: 0.2
-    - _Smoothness: 0
+    - _Smoothness: 1
     - _SmoothnessRemapMax: 0.81900454
     - _SmoothnessRemapMin: 0
     - _SmoothnessTextureChannel: 0
@@ -328,6 +328,7 @@ Material:
     - _UseEmissiveIntensity: 0
     - _UseShadowThreshold: 0
     - _WorkflowMode: 1
+    - _XRMotionVectorsPass: 1
     - _ZTestDepthEqualForOpaque: 3
     - _ZTestGBuffer: 4
     - _ZTestModeDistortion: 4

@@ -16,26 +16,31 @@ Shader "Hidden/Lighting/ScreenSpaceReflection"
 	
     SubShader
     {
-		Cull Off ZWrite Off ZTest Always
+		Cull Off
+		ZWrite Off
+		ZTest Always
 		Blend One Zero
 
 		Pass
 		{
 			Name "Screen Space Reflection Hit"
-			Tags { "LightMode" = "Screen Space Reflection PBR Accumulation" }
+			Tags 
+			{ 
+				"RenderPipeline" = "UniversalPipeline"
+				"LightMode" = "Screen Space Reflection PBR Accumulation"
+			}
 			
+
 			HLSLPROGRAM
+
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 			#include "Packages/com.unity.render-pipelines.core/Runtime/Utilities/Blit.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/DeclareOpaqueTexture.hlsl"
 			
-			#pragma vertex Vert
-			#pragma fragment frag
+			#define _SSR_ACCUM
 			
 			#pragma multi_compile_fragment _ _GBUFFER_NORMALS_OCT
 			#pragma multi_compile_local_fragment _ _BACKFACE_ENABLED
-			
-			#define _SSR_ACCUM
 			
 			#pragma target 3.5
 			
@@ -54,11 +59,14 @@ Shader "Hidden/Lighting/ScreenSpaceReflection"
 			
 			#include "./ScreenSpaceReflection.hlsl"
 			
+			#pragma vertex Vert
+			#pragma fragment frag
+
 			half3 frag(Varyings input) : SV_Target
 			{
 				UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(input);
-				float2 screenUV = input.texcoord;
 
+				float2 screenUV = input.texcoord;
 				float depth = SAMPLE_TEXTURE2D_X_LOD(_CameraDepthTexture, sampler_CameraDepthTexture, screenUV, 0).r;
 				
 			#if !UNITY_REVERSED_Z
@@ -68,8 +76,10 @@ Shader "Hidden/Lighting/ScreenSpaceReflection"
 			#if (UNITY_REVERSED_Z == 1)
 				isBackground = depth == 0.0 ? true : false;
 			#else
-				isBackground = depth == 1.0 ? true : false; // OpenGL Platforms.
+				// OpenGL Platforms.
+				isBackground = depth == 1.0 ? true : false;
 			#endif
+
 				if (isBackground)
 					return half3(0.0, 0.0, 0.0);
 				
@@ -98,17 +108,16 @@ Shader "Hidden/Lighting/ScreenSpaceReflection"
 				half3 reflectVector = ImportanceSampleGGX_VNDF(random, normalWS, -invViewDirWS, gBuffer2.a, valid);
 				if (!valid)
 					return half3(0.0, 0.0, 0.0);
+
 				ray.direction = reflectVector;
-				
 				half dither = half(InterleavedGradientNoise(screenUV * _ScreenSize.xy, 0)) * 0.25 - 0.125 + half(GenerateRandomFloat(screenUV)) * 0.1 - 0.05;
 				RayHit rayHit = RayMarching(ray, dither, length(depth));
 				
 				UNITY_BRANCH
 				if (rayHit.distance > REAL_EPS)
 				{
-					// [Match URP Fresnel] Use slightly simpler fresnelTerm (Pow4 vs Pow5) as a small optimization.
+					// Match URP Fresnel. Use slightly simpler fresnel term (Pow4 vs Pow5) as a small optimization.
 					half fresnel = (max(gBuffer2.a, 0.04) - 0.04) * Pow4(1.0 - saturate(dot(normalWS, -invViewDirWS))) + 0.04;
-
 					return half3(rayHit.uv, fresnel);
 				}
 				else
@@ -122,28 +131,23 @@ Shader "Hidden/Lighting/ScreenSpaceReflection"
 		Pass
 		{
 			Name "Resolve Reflection"
-			Tags { "LightMode" = "Screen Space Reflection PBR Accumulation" }
+			Tags 
+			{ 
+				"RenderPipeline" = "UniversalPipeline"
+				"LightMode" = "Screen Space Reflection PBR Accumulation"
+			}
 			
 			Blend One Zero
 			
 			HLSLPROGRAM
+
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/DeclareOpaqueTexture.hlsl"
 			#include "Packages/com.unity.render-pipelines.core/Runtime/Utilities/Blit.hlsl"
 			
-			#pragma vertex Vert
-			#pragma fragment frag
-			
 			#pragma multi_compile_fragment _ _GBUFFER_NORMALS_OCT
 			
 			#pragma target 3.5
-			
-			// TEXTURE2D_X(_MotionVectorTexture);
-			// float4 _MotionVectorTexture_TexelSize;
-			
-			// TEXTURE2D_X(_ScreenSpaceReflectionHistoryTexture);
-			
-			TEXTURE2D_X(_ScreenSpaceReflectionHitTexture);
 			
 			CBUFFER_START(UnityPerMaterial)
 			half _Seed;
@@ -158,13 +162,20 @@ Shader "Hidden/Lighting/ScreenSpaceReflection"
 			half _AccumulationFactor;
 			CBUFFER_END
 			
+			TEXTURE2D_X(_ScreenSpaceReflectionHitTexture);
+
 			#include "./ScreenSpaceReflection.hlsl"
-			//#include "./TemporalAccumulation.hlsl"
 			
+			#pragma vertex Vert
+			#pragma fragment frag
+
 			half4 frag(Varyings input) : SV_Target
 			{
 				UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(input);
+
 				float2 screenUV = input.texcoord;
+				float2 stereoUV = UnityStereoTransformScreenSpaceTex(screenUV);
+
 				float depth = SAMPLE_TEXTURE2D_X_LOD(_CameraDepthTexture, sampler_CameraDepthTexture, screenUV, 0).r;
 				
 			#if !UNITY_REVERSED_Z
@@ -174,13 +185,13 @@ Shader "Hidden/Lighting/ScreenSpaceReflection"
 				float3 reflectUVFresnel = SAMPLE_TEXTURE2D_X_LOD(_ScreenSpaceReflectionHitTexture, sampler_PointClamp, screenUV, 0).xyz;
 				float2 reflectUV = reflectUVFresnel.xy;
 				
-				// [Match URP Fresnel] Use slightly simpler fresnelTerm (Pow4 vs Pow5) as a small optimization.
+				// Match URP Fresnel. Use slightly simpler fresnelTerm (Pow4 vs Pow5) as a small optimization.
 				half fresnel = reflectUVFresnel.z;
 				
 				if (!any(reflectUV))
 				{
 					reflectUV = screenUV;
-					return half4(SAMPLE_TEXTURE2D_X_LOD(_BlitTexture, sampler_PointClamp, UnityStereoTransformScreenSpaceTex(screenUV), 0.0).rgb, 1.0);
+					return half4(SAMPLE_TEXTURE2D_X_LOD(_BlitTexture, sampler_PointClamp, stereoUV, 0.0).rgb, 1.0);
 				}
 				
 				// The surfaceData of current pixel.
@@ -188,47 +199,41 @@ Shader "Hidden/Lighting/ScreenSpaceReflection"
 				HitSurfaceDataFromGBuffers(screenUV, screenHit.albedo, screenHit.specular, screenHit.occlusion, screenHit.normal, screenHit.smoothness);
 				
 				half3 reflectColor = SAMPLE_TEXTURE2D_X_LOD(_BlitTexture, sampler_PointClamp, reflectUV, 0.0).rgb;
-				
-				half3 sceneColor = SAMPLE_TEXTURE2D_X_LOD(_BlitTexture, sampler_PointClamp, UnityStereoTransformScreenSpaceTex(screenUV), 0.0).rgb;
 				reflectColor *= screenHit.occlusion;
 				
-				// [Approximate Blending] We have to blend the results without separating environment reflections.
+				// Approximate blending. We have to blend the results without separating environment reflections.
 				half reflectivity = ReflectivitySpecular(screenHit.specular);
 				reflectColor = lerp(reflectColor, reflectColor * screenHit.specular, saturate(reflectivity - fresnel));
 				
+				half3 sceneColor = SAMPLE_TEXTURE2D_X_LOD(_BlitTexture, sampler_PointClamp, stereoUV, 0.0).rgb;
 				half fadeSmoothness = (_FadeSmoothness < screenHit.smoothness) ? 1.0 : (screenHit.smoothness - _MinSmoothness) * rcp(_FadeSmoothness - _MinSmoothness);
-				
-				return half4(lerp(sceneColor, reflectColor, saturate(reflectivity + fresnel) * EdgeOfScreenFade(UnityStereoTransformScreenSpaceTex(screenUV)) * fadeSmoothness), 1.0);
+				return half4(lerp(sceneColor, reflectColor, saturate(reflectivity + fresnel) * EdgeOfScreenFade(stereoUV) * fadeSmoothness), 1.0);
 			}
+
 			ENDHLSL
 		}
 		
 		Pass
 		{
 			Name "Temporal Denoise"
-			Tags { "LightMode" = "Screen Space Reflection PBR Accumulation" }
+			Tags 
+			{ 
+				"RenderPipeline" = "UniversalPipeline"
+				"LightMode" = "Screen Space Reflection PBR Accumulation"
+			}
 			
-			// Preserve source alpha
+			// Preserve source alpha.
 			Blend SrcAlpha OneMinusSrcAlpha, SrcAlpha SrcAlpha
 			
 			HLSLPROGRAM
+
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/DeclareOpaqueTexture.hlsl"
 			#include "Packages/com.unity.render-pipelines.core/Runtime/Utilities/Blit.hlsl"
 			
-			#pragma vertex Vert
-			#pragma fragment frag
-			
-			#pragma multi_compile_fragment _ _GBUFFER_NORMALS_OCT
-			
 			#pragma target 3.5
 			
-			TEXTURE2D(_MotionVectorTexture);
-			float4 _MotionVectorTexture_TexelSize;
-			
-			TEXTURE2D(_ScreenSpaceReflectionHistoryTexture);
-			
-			TEXTURE2D(_ScreenSpaceReflectionHitTexture);
+			#pragma multi_compile_fragment _ _GBUFFER_NORMALS_OCT
 			
 			CBUFFER_START(UnityPerMaterial)
 			half _Seed;
@@ -243,14 +248,23 @@ Shader "Hidden/Lighting/ScreenSpaceReflection"
 			half _AccumulationFactor;
 			CBUFFER_END
 			
+			TEXTURE2D(_MotionVectorTexture);
+			float4 _MotionVectorTexture_TexelSize;
+			
+			TEXTURE2D(_ScreenSpaceReflectionHitTexture);
+			TEXTURE2D(_ScreenSpaceReflectionHistoryTexture);
+
 			#include "./ScreenSpaceReflection.hlsl"
 			#include "./TemporalAccumulation.hlsl"
 			
+			#pragma vertex Vert
+			#pragma fragment frag
+
 			half4 frag(Varyings input) : SV_Target
 			{
 				UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(input);
+
 				float2 screenUV = input.texcoord;
-				
 				float2 reflectUV = SAMPLE_TEXTURE2D_X_LOD(_ScreenSpaceReflectionHitTexture, sampler_PointClamp, screenUV, 0).xy;
 				
 				if (!any(reflectUV))
@@ -265,33 +279,34 @@ Shader "Hidden/Lighting/ScreenSpaceReflection"
 			#if (UNITY_REVERSED_Z == 1)
 				isBackground = depth == 0.0 ? true : false;
 			#else
-				isBackground = depth == 1.0 ? true : false; // OpenGL Platforms.
+				// OpenGL Platforms.
+				isBackground = depth == 1.0 ? true : false;
 			#endif
 				
 				if (isBackground)
 					return half4(0.0, 0.0, 0.0, 0.0);
 				
-				// Color Variance
-				half3 colorCenter = SampleColorPoint(screenUV, float2(0.0, 0.0)).xyz;  // Point == Linear as uv == input pixel center.
+				// Color Variance. Point == Linear as uv == input pixel center.
+				half3 colorCenter = SampleColorPoint(screenUV, float2(0.0, 0.0)).xyz;  
 				
 				half3 boxMax = colorCenter;
 				half3 boxMin = colorCenter;
 				half3 moment1 = colorCenter;
 				half3 moment2 = colorCenter * colorCenter;
 				
-				// adjacent pixels
+				// Adjacent pixels.
 				AdjustColorBox(boxMin, boxMax, moment1, moment2, screenUV, 0.0, -1.0);
 				AdjustColorBox(boxMin, boxMax, moment1, moment2, screenUV, -1.0, 0.0);
 				AdjustColorBox(boxMin, boxMax, moment1, moment2, screenUV, 1.0, 0.0);
 				AdjustColorBox(boxMin, boxMax, moment1, moment2, screenUV, 0.0, 1.0);
 				
-				// Motion Vectors
+				// Motion vectors.
 				half bestOffsetX = 0.0;
 				half bestOffsetY = 0.0;
+
 				/*
 				half bestDepth = 1.0;
 				
-				// adjacent pixels (including center)
 				AdjustBestDepthOffset(bestDepth, bestOffsetX, bestOffsetY, screenUV, 0.0, 0.0);
 				AdjustBestDepthOffset(bestDepth, bestOffsetX, bestOffsetY, screenUV, 1.0, 0.0);
 				AdjustBestDepthOffset(bestDepth, bestOffsetX, bestOffsetY, screenUV, 0.0, -1.0);
@@ -304,10 +319,9 @@ Shader "Hidden/Lighting/ScreenSpaceReflection"
 				
 				float2 prevUV = screenUV + velocity;
 				
-				// Re-projected color from last frame.
+				// Reprojected color from last frame.
 				half3 prevColor = SAMPLE_TEXTURE2D_LOD(_ScreenSpaceReflectionHistoryTexture, sampler_PointClamp, prevUV, 0).rgb;
 				
-				// Can be replace by clamp() to reduce performance cost.
 				//prevColor = ClipToAABBCenter(prevColor, boxMin, boxMax);
 				prevColor = clamp(prevColor, boxMin, boxMax);
 				
@@ -316,6 +330,7 @@ Shader "Hidden/Lighting/ScreenSpaceReflection"
 				return half4(prevColor, intensity);
 
 			}
+
 			ENDHLSL
 		}
 
