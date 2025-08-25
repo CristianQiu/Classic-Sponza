@@ -8,7 +8,7 @@ using UnityEngine.Rendering.Universal;
 /// <summary>
 /// Pass to render GBuffers in forward or forward+ rendering paths.
 /// </summary>
-public class ForwardGBufferPass : ScriptableRenderPass
+public sealed class ForwardGBufferPass : ScriptableRenderPass
 {
 	#region Definitions
 
@@ -96,16 +96,6 @@ public class ForwardGBufferPass : ScriptableRenderPass
 	#endregion
 
 	#region Methods
-
-	/// <summary>
-	/// Executes the pass with the information from the pass data.
-	/// </summary>
-	/// <param name="passData"></param>
-	/// <param name="context"></param>
-	private static void ExecutePass(PassData passData, RasterGraphContext context)
-	{
-		context.cmd.DrawRendererList(passData.rendererListHandle);
-	}
 
 	/// <summary>
 	/// Creates and returns all the necessary render graph texture handles.
@@ -274,6 +264,16 @@ public class ForwardGBufferPass : ScriptableRenderPass
 	private bool IsOpenGL()
 	{
 		return SystemInfo.graphicsDeviceType == GraphicsDeviceType.OpenGLES3 || SystemInfo.graphicsDeviceType == GraphicsDeviceType.OpenGLCore;
+	}
+
+	/// <summary>
+	/// Executes the pass with the information from the pass data.
+	/// </summary>
+	/// <param name="passData"></param>
+	/// <param name="context"></param>
+	private static void ExecutePass(PassData passData, RasterGraphContext context)
+	{
+		context.cmd.DrawRendererList(passData.rendererListHandle);
 	}
 
 	#endregion

@@ -26,13 +26,13 @@ Material:
     m_Ints: []
     m_Floats:
     - _AccumulationFactor: 1
-    - _DownSample: 0.5
+    - _DownSample: 0.25
     - _EdgeFade: 0.5
-    - _FadeSmoothness: 0.11
-    - _MaxStep: 32
-    - _MinSmoothness: 0.1
+    - _FadeSmoothness: 0.412
+    - _MaxStep: 64
+    - _MinSmoothness: 0.402
     - _Seed: 0
-    - _StepSize: 0.3
+    - _StepSize: 0.2
     - _StepSizeMultiplier: 1.33
     - _Thickness: 0.25
     m_Colors: []

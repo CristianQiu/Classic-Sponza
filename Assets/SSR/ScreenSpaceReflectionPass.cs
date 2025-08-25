@@ -5,10 +5,16 @@ using UnityEngine.Rendering.RenderGraphModule;
 using UnityEngine.Rendering.RenderGraphModule.Util;
 using UnityEngine.Rendering.Universal;
 
-public class ScreenSpaceReflectionPass : ScriptableRenderPass
+/// <summary>
+/// Pass to render SSR.
+/// </summary>
+public sealed class ScreenSpaceReflectionPass : ScriptableRenderPass
 {
 	#region Definitions
 
+	/// <summary>
+	/// Holds the texture handles used by the render pass.
+	/// </summary>
 	private struct TextureHandles
 	{
 		public TextureHandle hitUvHandle;
@@ -16,13 +22,19 @@ public class ScreenSpaceReflectionPass : ScriptableRenderPass
 		public TextureHandle historyHandle;
 	}
 
+	/// <summary>
+	/// The subpasses this render pass is made of.
+	/// </summary>
 	private enum PassStage
 	{
-		One,
-		Two,
-		Three,
+		hitUv,
+		resolveColor,
+		reprojection,
 	}
 
+	/// <summary>
+	/// Holds the data used by the render pass.
+	/// </summary>
 	private class PassData
 	{
 		public PassStage stage;
@@ -34,7 +46,7 @@ public class ScreenSpaceReflectionPass : ScriptableRenderPass
 		public int materialPassIndex;
 
 		public TextureHandle hitUvHandle;
-		public TextureHandle reflectHandle;
+		//public TextureHandle reflectHandle;
 		public TextureHandle historyHandle;
 	}
 
@@ -52,25 +64,53 @@ public class ScreenSpaceReflectionPass : ScriptableRenderPass
 	private static readonly int DownSampleId = Shader.PropertyToID("_DownSample");
 	private static readonly int AccumFactorId = Shader.PropertyToID("_AccumulationFactor");
 
+	private static readonly int SsrReflectionHitTextureId = Shader.PropertyToID("_ScreenSpaceReflectionHitTexture");
+	private static readonly int SsrHistoryTextureId = Shader.PropertyToID("_ScreenSpaceReflectionHistoryTexture");
+
+	private Material ssrMaterial;
+
+	private int hitUvPassIndex;
+	private int resolveColorPassIndex;
+	private int reprojectionPassIndex;
+
 	private RTHandle historyHandle;
-	private readonly Material ssrMaterial;
-	private const ScreenSpaceReflectionURP.Resolution resolution = ScreenSpaceReflectionURP.Resolution.Half;
-	public bool isMotionValid; // URP SceneView doesn't update motion vectors unless in play mode.
 
 	#endregion
 
 	#region Initialization
 
+	/// <summary>
+	/// Constructor.
+	/// </summary>
+	/// <param name="material"></param>
 	public ScreenSpaceReflectionPass(Material material)
 	{
 		profilingSampler = new ProfilingSampler("Screen Space Reflection");
 		ssrMaterial = material;
+		requiresIntermediateTexture = false;
+
+		InitPassesIndices();
+	}
+
+	/// <summary>
+	/// Initializes the passes indices from their name.
+	/// </summary>
+	private void InitPassesIndices()
+	{
+		hitUvPassIndex = ssrMaterial.FindPass("Screen Space Reflection Hit");
+		resolveColorPassIndex = ssrMaterial.FindPass("Resolve Reflection");
+		reprojectionPassIndex = ssrMaterial.FindPass("Temporal Denoise");
 	}
 
 	#endregion
 
 	#region Scriptable Render Pass Methods
 
+	/// <summary>
+	/// <inheritdoc/>
+	/// </summary>
+	/// <param name="renderGraph"></param>
+	/// <param name="frameData"></param>
 	public override void RecordRenderGraph(RenderGraph renderGraph, ContextContainer frameData)
 	{
 		UniversalRenderingData renderingData = frameData.Get<UniversalRenderingData>();
@@ -79,13 +119,13 @@ public class ScreenSpaceReflectionPass : ScriptableRenderPass
 
 		TextureHandles textureHandles = CreateRenderGraphTextures(renderGraph, renderingData, cameraData, resourceData);
 
-		using (IRasterRenderGraphBuilder builder = renderGraph.AddRasterRenderPass("Screen Space Hit Pass", out PassData passData, profilingSampler))
+		using (IRasterRenderGraphBuilder builder = renderGraph.AddRasterRenderPass("SSR Screen Space Hit Pass", out PassData passData, profilingSampler))
 		{
-			passData.stage = PassStage.One;
+			passData.stage = PassStage.hitUv;
 			passData.source = resourceData.cameraDepthTexture;
 			passData.target = textureHandles.hitUvHandle;
 			passData.material = ssrMaterial;
-			passData.materialPassIndex = 0;
+			passData.materialPassIndex = hitUvPassIndex;
 			passData.historyHandle = textureHandles.historyHandle;
 
 			builder.SetRenderAttachment(textureHandles.hitUvHandle, 0);
@@ -95,13 +135,13 @@ public class ScreenSpaceReflectionPass : ScriptableRenderPass
 			builder.SetRenderFunc((PassData data, RasterGraphContext context) => ExecutePass(data, context));
 		}
 
-		using (IRasterRenderGraphBuilder builder = renderGraph.AddRasterRenderPass("Resolve Color Pass", out PassData passData, profilingSampler))
+		using (IRasterRenderGraphBuilder builder = renderGraph.AddRasterRenderPass("SSR Resolve Color Pass", out PassData passData, profilingSampler))
 		{
-			passData.stage = PassStage.Two;
+			passData.stage = PassStage.resolveColor;
 			passData.source = resourceData.cameraColor;
 			passData.target = textureHandles.reflectHandle;
 			passData.material = ssrMaterial;
-			passData.materialPassIndex = 1;
+			passData.materialPassIndex = resolveColorPassIndex;
 			passData.hitUvHandle = textureHandles.hitUvHandle;
 
 			builder.SetRenderAttachment(textureHandles.reflectHandle, 0);
@@ -116,18 +156,17 @@ public class ScreenSpaceReflectionPass : ScriptableRenderPass
 			builder.SetRenderFunc((PassData data, RasterGraphContext context) => ExecutePass(data, context));
 		}
 
-		// Blit to Screen (required by denoiser)
-		renderGraph.AddCopyPass(textureHandles.reflectHandle, resourceData.cameraColor, "Blit to Screen (Denoiser req)");
+		renderGraph.AddCopyPass(textureHandles.reflectHandle, resourceData.cameraColor, "SSR Blit to Screen");
 
-		if (/*isMotionValid &&*/ VolumeManager.instance.stack.GetComponent<ScreenSpaceReflection>().accumFactor.value != 0.0f)
+		if (GetSSRVolume().accumFactor.value != 0.0f)
 		{
-			using (IRasterRenderGraphBuilder builder = renderGraph.AddRasterRenderPass("Temporal Denoise", out PassData passData, profilingSampler))
+			using (IRasterRenderGraphBuilder builder = renderGraph.AddRasterRenderPass("SSR Temporal Denoise", out PassData passData, profilingSampler))
 			{
-				passData.stage = PassStage.Three;
+				passData.stage = PassStage.reprojection;
 				passData.source = textureHandles.reflectHandle;
 				passData.target = resourceData.cameraColor;
 				passData.material = ssrMaterial;
-				passData.materialPassIndex = 2;
+				passData.materialPassIndex = reprojectionPassIndex;
 				passData.historyHandle = textureHandles.historyHandle;
 
 				builder.SetRenderAttachment(resourceData.cameraColor, 0);
@@ -139,33 +178,8 @@ public class ScreenSpaceReflectionPass : ScriptableRenderPass
 				builder.SetRenderFunc((PassData data, RasterGraphContext context) => ExecutePass(data, context));
 			}
 
-			//using (IRasterRenderGraphBuilder builder = renderGraph.AddRasterRenderPass("copy history", out PassData passData, profilingSampler))
-			//{
-			//	//builder.AllowGlobalStateModification(true);
-
-			//	passData.stage = PassStage.Four;
-			//	passData.source = resourceData.cameraColor;
-			//	passData.target = textureHandles.historyHandle;
-			//	passData.material = ssrMaterial;
-
-			//	builder.SetRenderAttachment(textureHandles.historyHandle, 0, AccessFlags.WriteAll);
-			//	builder.SetRenderFunc((PassData data, RasterGraphContext context) => ExecutePass(data, context));
-
-			//	//builder.SetGlobalTextureAfterPass(textureHandles.historyHandle, Shader.PropertyToID("_ScreenSpaceReflectionHistoryTexture"));
-			//}
-
-			//// We need to Load & Store the history texture, or it will not be stored on
-			//// some platforms.
-			//cmd.SetRenderTarget(
-			//historyHandle,
-			//RenderBufferLoadAction.Load,
-			//RenderBufferStoreAction.Store,
-			//historyHandle,
-			//RenderBufferLoadAction.DontCare,
-			//RenderBufferStoreAction.DontCare);
-
-			//// Update History
-			renderGraph.AddCopyPass(resourceData.cameraColor, textureHandles.historyHandle, "Update history");
+			// Update the history.
+			renderGraph.AddCopyPass(resourceData.cameraColor, textureHandles.historyHandle, "SSR Update history");
 		}
 	}
 
@@ -173,30 +187,14 @@ public class ScreenSpaceReflectionPass : ScriptableRenderPass
 
 	#region Methods
 
-	public void AddRenderPass()
+	/// <summary>
+	/// Configures this pass before it is enqueued to the renderer.
+	/// </summary>
+	public void ConfigurePass()
 	{
 		ConfigureInput(ScriptableRenderPassInput.Depth | ScriptableRenderPassInput.Motion);
-		renderPassEvent = RenderPassEvent.AfterRenderingTransparents;
-	}
 
-	private static void ExecutePass(PassData passData, RasterGraphContext context)
-	{
-		PassStage stage = passData.stage;
-
-		if (stage == PassStage.One)
-		{
-			passData.material.SetTexture(Shader.PropertyToID("_ScreenSpaceReflectionHistoryTexture"), passData.historyHandle);
-			UpdateMaterialProperties(passData.material);
-		}
-		else if (stage == PassStage.Two)
-		{
-			passData.material.SetTexture("_ScreenSpaceReflectionHitTexture", passData.hitUvHandle);
-		}
-		else
-		{
-		}
-
-		Blitter.BlitTexture(context.cmd, passData.source, Vector2.one, passData.material, passData.materialPassIndex);
+		renderPassEvent = RenderPassEvent.BeforeRenderingTransparents;
 	}
 
 	/// <summary>
@@ -217,6 +215,8 @@ public class ScreenSpaceReflectionPass : ScriptableRenderPass
 		cameraDesc.filterMode = FilterMode.Point;
 		cameraDesc.wrapMode = TextureWrapMode.Clamp;
 		cameraDesc.useMipMap = false;
+
+		ScreenSpaceReflection.Resolution resolution = GetSSRVolume().resolution.value;
 
 		TextureDesc hitDesc = cameraDesc;
 		hitDesc.width = (int)resolution * (int)(cameraDesc.width * 0.25f);
@@ -247,25 +247,27 @@ public class ScreenSpaceReflectionPass : ScriptableRenderPass
 		return textureHandles;
 	}
 
+	/// <summary>
+	/// Updates the material properties with the parameters from the volume.
+	/// </summary>
+	/// <param name="ssrMaterial"></param>
 	private static void UpdateMaterialProperties(Material ssrMaterial)
 	{
-		ScreenSpaceReflection ssrVolume = VolumeManager.instance.stack.GetComponent<ScreenSpaceReflection>();
+		ScreenSpaceReflection ssr = GetSSRVolume();
 
-		ssrMaterial.SetFloat("_FrameCount", Time.renderedFrameCount % 64);
-
-		if (ssrVolume.quality.value == ScreenSpaceReflection.Quality.Low)
+		if (ssr.quality.value == ScreenSpaceReflection.Quality.Low)
 		{
 			ssrMaterial.SetFloat(StepSizeId, 0.4f);
 			ssrMaterial.SetFloat(StepSizeMultiplierId, 1.33f);
 			ssrMaterial.SetFloat(MaxStepId, 16);
 		}
-		else if (ssrVolume.quality.value == ScreenSpaceReflection.Quality.Medium)
+		else if (ssr.quality.value == ScreenSpaceReflection.Quality.Medium)
 		{
 			ssrMaterial.SetFloat(StepSizeId, 0.3f);
 			ssrMaterial.SetFloat(StepSizeMultiplierId, 1.33f);
 			ssrMaterial.SetFloat(MaxStepId, 32);
 		}
-		else if (ssrVolume.quality.value == ScreenSpaceReflection.Quality.High)
+		else if (ssr.quality.value == ScreenSpaceReflection.Quality.High)
 		{
 			ssrMaterial.SetFloat(StepSizeId, 0.2f);
 			ssrMaterial.SetFloat(StepSizeMultiplierId, 1.33f);
@@ -275,15 +277,48 @@ public class ScreenSpaceReflectionPass : ScriptableRenderPass
 		{
 			ssrMaterial.SetFloat(StepSizeId, 0.2f);
 			ssrMaterial.SetFloat(StepSizeMultiplierId, 1.1f);
-			ssrMaterial.SetFloat(MaxStepId, ssrVolume.maxStep.value);
+			ssrMaterial.SetFloat(MaxStepId, ssr.maxStep.value);
 		}
-		ssrMaterial.SetFloat(MinSmoothnessId, ssrVolume.minSmoothness.value);
-		ssrMaterial.SetFloat(FadeSmoothnessId, ssrVolume.fadeSmoothness.value <= ssrVolume.minSmoothness.value ? ssrVolume.minSmoothness.value + 0.01f : ssrVolume.fadeSmoothness.value);
-		ssrMaterial.SetFloat(EdgeFadeId, ssrVolume.edgeFade.value);
-		ssrMaterial.SetFloat(ThicknessId, ssrVolume.thickness.value);
 
-		ssrMaterial.SetFloat(DownSampleId, (float)resolution * 0.25f);
-		ssrMaterial.SetFloat(AccumFactorId, ssrVolume.accumFactor.value);
+		ssrMaterial.SetFloat(MinSmoothnessId, ssr.minSmoothness.value);
+		ssrMaterial.SetFloat(FadeSmoothnessId, ssr.fadeSmoothness.value <= ssr.minSmoothness.value ? ssr.minSmoothness.value + 0.01f : ssr.fadeSmoothness.value);
+		ssrMaterial.SetFloat(EdgeFadeId, ssr.edgeFade.value);
+		ssrMaterial.SetFloat(ThicknessId, ssr.thickness.value);
+
+		ssrMaterial.SetFloat(DownSampleId, (float)ssr.resolution.value * 0.25f);
+		ssrMaterial.SetFloat(AccumFactorId, ssr.accumFactor.value);
+	}
+
+	/// <summary>
+	/// Gets the SSR from the volume.
+	/// </summary>
+	/// <returns></returns>
+	private static ScreenSpaceReflection GetSSRVolume()
+	{
+		return VolumeManager.instance.stack.GetComponent<ScreenSpaceReflection>();
+	}
+
+	/// <summary>
+	/// Executes the pass with the information from the pass data.
+	/// </summary>
+	/// <param name="passData"></param>
+	/// <param name="context"></param>
+	private static void ExecutePass(PassData passData, RasterGraphContext context)
+	{
+		PassStage stage = passData.stage;
+
+		if (stage == PassStage.hitUv)
+		{
+			// Set history texture from last frame.
+			passData.material.SetTexture(SsrHistoryTextureId, passData.historyHandle);
+			UpdateMaterialProperties(passData.material);
+		}
+		else if (stage == PassStage.resolveColor)
+		{
+			passData.material.SetTexture(SsrReflectionHitTextureId, passData.hitUvHandle);
+		}
+
+		Blitter.BlitTexture(context.cmd, passData.source, Vector2.one, passData.material, passData.materialPassIndex);
 	}
 
 	#endregion
