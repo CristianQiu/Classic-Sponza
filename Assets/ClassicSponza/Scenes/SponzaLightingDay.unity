@@ -322,7 +322,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &45695394
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -378,8 +378,8 @@ Light:
   serializedVersion: 11
   m_Type: 2
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 10.4
-  m_Range: 23.13
+  m_Intensity: 2.5
+  m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -441,7 +441,7 @@ Transform:
   m_GameObject: {fileID: 45695393}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.978, y: 4.076, z: 1.89}
+  m_LocalPosition: {x: 3.914, y: 5.753, z: 1.89}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1644,7 +1644,7 @@ Transform:
   m_GameObject: {fileID: 515750822}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.315, z: 1.87}
+  m_LocalPosition: {x: 0, y: 2.15, z: 1.87}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2296,8 +2296,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
   anisotropy: 0.25
-  scattering: 11.36
-  radius: 0.362
+  scattering: 1
+  radius: 0
 --- !u!114 &738853841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2338,8 +2338,8 @@ Light:
   serializedVersion: 11
   m_Type: 0
   m_Color: {r: 1, g: 0.6347883, b: 0.3226415, a: 1}
-  m_Intensity: 227.34
-  m_Range: 13.6
+  m_Intensity: 100
+  m_Range: 10
   m_SpotAngle: 95.62802
   m_InnerSpotAngle: 20.368576
   m_CookieSize: 10
@@ -2438,9 +2438,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8bca95f7c947b4db5fb152a0d693d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
-  anisotropy: 0.25
-  scattering: 3.36
-  radius: 0.46
+  anisotropy: 0.415
+  scattering: 16
+  radius: 0.223
 --- !u!114 &816233375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2481,8 +2481,8 @@ Light:
   serializedVersion: 11
   m_Type: 0
   m_Color: {r: 0.8000373, g: 0.6876824, b: 0.8867924, a: 1}
-  m_Intensity: 90.5
-  m_Range: 15.1
+  m_Intensity: 193.61
+  m_Range: 10
   m_SpotAngle: 65.89822
   m_InnerSpotAngle: 25.339365
   m_CookieSize: 10
@@ -2512,7 +2512,7 @@ Light:
       e32: 0
       e33: 1
     m_UseCullingMatrixOverride: 0
-  m_Cookie: {fileID: 0}
+  m_Cookie: {fileID: 2800000, guid: 3f3b91b2143e1634cae81a02266c39ec, type: 3}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
   m_RenderMode: 0
@@ -3123,7 +3123,7 @@ Light:
   serializedVersion: 11
   m_Type: 1
   m_Color: {r: 1, g: 0.9431372, b: 0.9, a: 1}
-  m_Intensity: 2.27
+  m_Intensity: 2
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -3166,7 +3166,7 @@ Light:
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 0.5, y: 0.5}
   m_BounceIntensity: 1
-  m_ColorTemperature: 13040
+  m_ColorTemperature: 6074
   m_UseColorTemperature: 1
   m_BoundingSphereOverride: {x: 9.572e-42, y: 1.02e-43, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
@@ -3941,14 +3941,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1399118083}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4a5ce179cf5e4fa449dc6d1979815cee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricFogVolumeModifier
-  radius: 7.06
-  fallOff: 1.61
-  densityMultiplier: 12
+  radius: 2.9
+  fallOff: 6.66
+  densityMultiplier: 603.5
 --- !u!4 &1399118085
 Transform:
   m_ObjectHideFlags: 0
@@ -3958,7 +3958,7 @@ Transform:
   m_GameObject: {fileID: 1399118083}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.501, y: 0.24714, z: -0.676}
+  m_LocalPosition: {x: -0.3, y: -0.066, z: -1.584}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4046,7 +4046,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!23 &1476750864
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4060,7 +4060,7 @@ MeshRenderer:
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
-  m_LightProbeUsage: 1
+  m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
@@ -8042,8 +8042,8 @@ Light:
   serializedVersion: 11
   m_Type: 2
   m_Color: {r: 0.53614664, g: 0.3973584, b: 0.5999999, a: 1}
-  m_Intensity: 15.3
-  m_Range: 142.56
+  m_Intensity: 105.4
+  m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -8105,7 +8105,7 @@ Transform:
   m_GameObject: {fileID: 1716264974}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.6647742, z: -0, w: 0.7470444}
-  m_LocalPosition: {x: -3.66, y: 5.32, z: -1.942}
+  m_LocalPosition: {x: -3.68, y: 5.32, z: -1.942}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8978,7 +8978,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricAdditionalLight
   anisotropy: 0.25
-  scattering: 1
+  scattering: 2.43
   radius: 0
 --- !u!114 &2080224469
 MonoBehaviour:
@@ -9020,8 +9020,8 @@ Light:
   serializedVersion: 11
   m_Type: 0
   m_Color: {r: 0.3226415, g: 0.7075044, b: 1, a: 1}
-  m_Intensity: 638.36
-  m_Range: 15.38
+  m_Intensity: 100
+  m_Range: 10
   m_SpotAngle: 95.64378
   m_InnerSpotAngle: 58.006187
   m_CookieSize: 10
@@ -9083,7 +9083,7 @@ Transform:
   m_GameObject: {fileID: 2080224467}
   serializedVersion: 2
   m_LocalRotation: {x: 0.25259912, y: -0.6604511, z: 0.6456219, w: -0.28839296}
-  m_LocalPosition: {x: -0.31, y: 4.25, z: -3.31}
+  m_LocalPosition: {x: 1.251, y: 3.512, z: -3.31}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
