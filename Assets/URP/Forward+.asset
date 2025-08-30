@@ -70,11 +70,12 @@ MonoBehaviour:
     probeVolumeBlendStatesCS: {fileID: 0}
   m_RendererFeatures:
   - {fileID: -8135757167310299317}
+  - {fileID: -1359615465948190203}
   - {fileID: 8456717938884998189}
   - {fileID: 367515877368583667}
   - {fileID: 1499767318321007722}
-  - {fileID: -1359615465948190203}
-  m_RendererFeatureMap: 4b9fa11ff6fb178f2df4e9e8284c5c75f3d5de47bead19056a8c430e6e3ed01405ea07f1efac21ed
+  - {fileID: 432953528924819011}
+  m_RendererFeatureMap: 4b9fa11ff6fb178f05ea07f1efac21ed2df4e9e8284c5c75f3d5de47bead19056a8c430e6e3ed01443ced0cff0280206
   m_UseNativeRenderPass: 1
   xrSystemData: {fileID: 0}
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
@@ -99,8 +100,8 @@ MonoBehaviour:
   m_RenderingMode: 2
   m_DepthPrimingMode: 2
   m_CopyDepthMode: 2
-  m_DepthAttachmentFormat: 0
-  m_DepthTextureFormat: 0
+  m_DepthAttachmentFormat: 93
+  m_DepthTextureFormat: 93
   m_AccurateGbufferNormals: 1
   m_IntermediateTextureMode: 0
 --- !u!114 &367515877368583667
@@ -145,6 +146,25 @@ MonoBehaviour:
       restoreCamera: 1
       offset: {x: 0, y: 0, z: 0, w: 0}
       cameraFieldOfView: 60
+--- !u!114 &432953528924819011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8826dbbd2f20a84180629a9ae196e22, type: 3}
+  m_Name: ScreenSpaceGlobalIlluminationURP
+  m_EditorClassIdentifier: SSGIURP::ScreenSpaceGlobalIlluminationURP
+  m_Active: 0
+  m_Shader: {fileID: 4800000, guid: 052b080a79c052c4993acc96081d70b1, type: 3}
+  m_RenderingDebugger: 0
+  m_ReflectionProbes: 1
+  m_HighQualityUpscaling: 1
+  m_OverrideAmbientLighting: 1
+  m_BackfaceLighting: 1
 --- !u!114 &1499767318321007722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -157,7 +177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0138e415fc4e0c94081ad1fcb661b240, type: 3}
   m_Name: ScreenSpaceReflectionURP
   m_EditorClassIdentifier: Assembly-CSharp::ScreenSpaceReflectionURP
-  m_Active: 1
+  m_Active: 0
   shader: {fileID: 4800000, guid: 2c5af047abe71b94b90a267f4d45d465, type: 3}
 --- !u!114 &8456717938884998189
 MonoBehaviour:
