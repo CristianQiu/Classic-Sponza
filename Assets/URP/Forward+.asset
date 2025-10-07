@@ -15,7 +15,7 @@ MonoBehaviour:
   m_Active: 1
   m_Settings:
     AOMethod: 1
-    Downsample: 0
+    Downsample: 1
     AfterOpaque: 0
     Source: 1
     NormalSamples: 2
@@ -26,7 +26,7 @@ MonoBehaviour:
     BlurQuality: 0
     Falloff: 100
     SampleCount: -1
---- !u!114 &-1359615465948190203
+--- !u!114 &-1117760374853251000
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -70,12 +70,12 @@ MonoBehaviour:
     probeVolumeBlendStatesCS: {fileID: 0}
   m_RendererFeatures:
   - {fileID: -8135757167310299317}
-  - {fileID: -1359615465948190203}
   - {fileID: 8456717938884998189}
   - {fileID: 367515877368583667}
   - {fileID: 1499767318321007722}
   - {fileID: 432953528924819011}
-  m_RendererFeatureMap: 4b9fa11ff6fb178f05ea07f1efac21ed2df4e9e8284c5c75f3d5de47bead19056a8c430e6e3ed01443ced0cff0280206
+  - {fileID: -1117760374853251000}
+  m_RendererFeatureMap: 4b9fa11ff6fb178f2df4e9e8284c5c75f3d5de47bead19056a8c430e6e3ed01443ced0cff02802064850dd78dcea7cf0
   m_UseNativeRenderPass: 1
   xrSystemData: {fileID: 0}
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
@@ -98,10 +98,10 @@ MonoBehaviour:
     zFailOperation: 0
   m_ShadowTransparentReceive: 1
   m_RenderingMode: 2
-  m_DepthPrimingMode: 2
-  m_CopyDepthMode: 2
-  m_DepthAttachmentFormat: 93
-  m_DepthTextureFormat: 93
+  m_DepthPrimingMode: 1
+  m_CopyDepthMode: 0
+  m_DepthAttachmentFormat: 0
+  m_DepthTextureFormat: 0
   m_AccurateGbufferNormals: 1
   m_IntermediateTextureMode: 0
 --- !u!114 &367515877368583667

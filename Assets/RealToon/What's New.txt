@@ -1,0 +1,51 @@
+What's New to RealToon V5.0.13 (June 2025)
+=====================================
+
+[New]
+- VRC Light Volumes Support (VRChat) (Built-In/BiRP)
+*VRC Light Volumes packages is needed to be able to use this.
+
+- Anti - Aliasing Softness (New Companion Option for Anti - Aliasing Affect Cutout) (URP)
+*This will adjust the Anti - Aliasing Softness/Hardness Cutout.
+
+- Stencil: Pass (New Option For Outline) (URP)
+*Use it to resolve 'Mask UI' and other assets like weather and fog overlap issues.
+*Use 'Keep' for Mask UI while 'Invert' for other assets like weather and fog.
+
+- Limit Light Intensity (New Option For Lighthing) (Built-In/BiRP, URP & HDRP)
+*To limit light intensity, minimum and maximum intensity value.
+
+- RealToon Resources (New Folder Added)
+*Some resource for you to use on your objects/models that uses RealToon Shader.
+
+- A new Improved RealToon Welcome Screen
+*You can just click a button to import the right RealToon Shader package.
+*Information section about your project including SRP version and Unity Versions,
+You don't need to go to package manager to see the versions.
+
+- Map Mode (New Option For Self Lit)
+*This will allow you to use Emission Maps.
+
+- Lightmap Support (RealToon Shader - Default Lite) (Built-In/BiRP)
+- WebGPU support (URP) (Unity 6 to Later)
+- Nintendo Switch 2 support (URP & HDRP)
+
+
+[Changes]
+- Change RealToon Reflection Roughtness shader variable "_ReflectionRoughtness" to "_Smoothness". (URP)
+*Changed so that other assets affects RealToon's Reflection roughtness value.
+
+[Fixed]
+- 'Cutout' does not affect Depth. (URP)
+- 'Anisotropic Highlights' does not work. (URP) (Deferred and Deferred+) (Unity 6.1)
+- 'UI Mask' overlap issues, resolve by setting the added new outline option 'Stencil: Pass' to 'Keep'. (URP)
+- 'Gloss Texture Follow Light' not working properly. (URP)
+- Raytracing doubled declared punctual light function. (HDRP)
+
+====================================
+
+#Read the "Change - Fix Log.txt." file for previous updates.
+#This update supports Unity 5, 2017, 2018, 2019, 2020, 2022, 2023, Unity 6 and future unity versions.
+
+[Other Notes]
+* If you encounter some problems or need help just contact by email.

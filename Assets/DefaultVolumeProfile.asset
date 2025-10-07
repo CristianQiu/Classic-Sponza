@@ -47,6 +47,9 @@ MonoBehaviour:
   attenuationDistance:
     m_OverrideState: 1
     m_Value: 128
+  ambienceColor:
+    m_OverrideState: 1
+    m_Value: {r: 0, g: 0, b: 0, a: 1}
   mainLightContribution:
     m_OverrideState: 1
     m_Value: 0
@@ -739,6 +742,9 @@ MonoBehaviour:
   state:
     m_OverrideState: 1
     m_Value: 0
+  resolution:
+    m_OverrideState: 1
+    m_Value: 2
   minSmoothness:
     m_OverrideState: 1
     m_Value: 0.4
@@ -748,9 +754,6 @@ MonoBehaviour:
   edgeFade:
     m_OverrideState: 1
     m_Value: 0.1
-  thicknessMode:
-    m_OverrideState: 1
-    m_Value: 0
   thickness:
     m_OverrideState: 1
     m_Value: 0.25
@@ -799,6 +802,7 @@ MonoBehaviour:
   - {fileID: 4874567631048333469}
   - {fileID: -912680511913493629}
   - {fileID: -245662248559527881}
+  - {fileID: 449949617177306429}
 --- !u!114 &144899795695697735
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -845,6 +849,69 @@ MonoBehaviour:
   bladeRotation:
     m_OverrideState: 1
     m_Value: 0
+--- !u!114 &449949617177306429
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fd03cbbfa7b7fe4dbc3d7709b42d662, type: 3}
+  m_Name: ScreenSpaceGlobalIlluminationVolume
+  m_EditorClassIdentifier: SSGIURP::ScreenSpaceGlobalIlluminationVolume
+  active: 1
+  enable:
+    m_OverrideState: 1
+    m_Value: 0
+  thicknessMode:
+    m_OverrideState: 1
+    m_Value: 0
+  depthBufferThickness:
+    m_OverrideState: 1
+    m_Value: 0.1
+  quality:
+    m_OverrideState: 1
+    m_Value: 0
+  fullResolutionSS:
+    m_OverrideState: 1
+    m_Value: 0
+  resolutionScaleSS:
+    m_OverrideState: 1
+    m_Value: 0.5
+  sampleCount:
+    m_OverrideState: 1
+    m_Value: 2
+  maxRaySteps:
+    m_OverrideState: 1
+    m_Value: 32
+  denoiseSS:
+    m_OverrideState: 1
+    m_Value: 1
+  denoiserAlgorithmSS:
+    m_OverrideState: 1
+    m_Value: 1
+  denoiseIntensitySS:
+    m_OverrideState: 1
+    m_Value: 0.95
+  denoiserRadiusSS:
+    m_OverrideState: 1
+    m_Value: 0.6
+  secondDenoiserPassSS:
+    m_OverrideState: 1
+    m_Value: 1
+  rayMiss:
+    m_OverrideState: 1
+    m_Value: 3
+  indirectDiffuseLightingMultiplier:
+    m_OverrideState: 1
+    m_Value: 1
+  indirectDiffuseRenderingLayers:
+    m_OverrideState: 1
+    m_Value:
+      serializedVersion: 0
+      m_Bits: 4294967295
 --- !u!114 &1650460142716629719
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -910,6 +977,9 @@ MonoBehaviour:
   attenuationDistance:
     m_OverrideState: 1
     m_Value: 128
+  ambienceColor:
+    m_OverrideState: 0
+    m_Value: {r: 0, g: 0, b: 0, a: 1}
   mainLightContribution:
     m_OverrideState: 1
     m_Value: 0
@@ -941,7 +1011,7 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: 0
   noiseTexture:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: {fileID: 0}
   noiseScale:
     m_OverrideState: 0
@@ -953,7 +1023,7 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: {x: 0.1, y: -0.15, z: -0.05}
   distortionTexture:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: {fileID: 0}
   distortionScale:
     m_OverrideState: 0
