@@ -81,7 +81,7 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: 0
   noiseTexture:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: {fileID: 0}
   noiseScale:
     m_OverrideState: 1
@@ -93,7 +93,7 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: {x: 0.1, y: -0.15, z: -0.05}
   distortionTexture:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: {fileID: 0}
   distortionScale:
     m_OverrideState: 1
@@ -1227,6 +1227,9 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: {r: 1, g: 1, b: 1, a: 1}
   highQualityFiltering:
+    m_OverrideState: 1
+    m_Value: 0
+  filter:
     m_OverrideState: 1
     m_Value: 0
   downscale:

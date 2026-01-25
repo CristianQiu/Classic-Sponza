@@ -73,9 +73,8 @@ MonoBehaviour:
   - {fileID: 8456717938884998189}
   - {fileID: 367515877368583667}
   - {fileID: 1499767318321007722}
-  - {fileID: 432953528924819011}
   - {fileID: -1117760374853251000}
-  m_RendererFeatureMap: 4b9fa11ff6fb178f2df4e9e8284c5c75f3d5de47bead19056a8c430e6e3ed01443ced0cff02802064850dd78dcea7cf0
+  m_RendererFeatureMap: 4b9fa11ff6fb178f2df4e9e8284c5c75f3d5de47bead19056a8c430e6e3ed0144850dd78dcea7cf0
   m_UseNativeRenderPass: 1
   xrSystemData: {fileID: 0}
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
@@ -98,8 +97,8 @@ MonoBehaviour:
     zFailOperation: 0
   m_ShadowTransparentReceive: 1
   m_RenderingMode: 2
-  m_DepthPrimingMode: 1
-  m_CopyDepthMode: 0
+  m_DepthPrimingMode: 2
+  m_CopyDepthMode: 2
   m_DepthAttachmentFormat: 0
   m_DepthTextureFormat: 0
   m_AccurateGbufferNormals: 1
@@ -158,13 +157,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8826dbbd2f20a84180629a9ae196e22, type: 3}
   m_Name: ScreenSpaceGlobalIlluminationURP
   m_EditorClassIdentifier: SSGIURP::ScreenSpaceGlobalIlluminationURP
-  m_Active: 0
+  m_Active: 1
+  m_SSGIMaterial: {fileID: 0}
   m_Shader: {fileID: 4800000, guid: 052b080a79c052c4993acc96081d70b1, type: 3}
   m_RenderingDebugger: 0
   m_ReflectionProbes: 1
   m_HighQualityUpscaling: 1
   m_OverrideAmbientLighting: 1
   m_BackfaceLighting: 1
+  isShaderMismatchLogPrinted: 0
+  isDebuggerLogPrinted: 0
+  isBackfaceLightingLogPrinted: 0
 --- !u!114 &1499767318321007722
 MonoBehaviour:
   m_ObjectHideFlags: 0
