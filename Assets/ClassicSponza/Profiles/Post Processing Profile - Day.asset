@@ -666,7 +666,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81180773991d8724ab7f2d216912b564, type: 3}
   m_Name: ChromaticAberration
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   intensity:
     m_OverrideState: 1
     m_Value: 0.146
@@ -819,7 +819,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccf1aba9553839d41ae37dd52e9ebcce, type: 3}
   m_Name: MotionBlur
   m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.MotionBlur
-  active: 1
+  active: 0
   mode:
     m_OverrideState: 1
     m_Value: 1
@@ -894,13 +894,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5cf581a29a01ac44b68486e5025db52, type: 3}
   m_Name: ScreenSpaceReflection
   m_EditorClassIdentifier: Assembly-CSharp::ScreenSpaceReflection
-  active: 0
+  active: 1
   state:
     m_OverrideState: 1
     m_Value: 1
   resolution:
     m_OverrideState: 1
-    m_Value: 2
+    m_Value: 4
   minSmoothness:
     m_OverrideState: 1
     m_Value: 0
@@ -912,16 +912,16 @@ MonoBehaviour:
     m_Value: 0
   thickness:
     m_OverrideState: 1
-    m_Value: 0.25
+    m_Value: 1
   quality:
     m_OverrideState: 1
-    m_Value: 2
+    m_Value: 3
   maxStep:
     m_OverrideState: 1
-    m_Value: 128
+    m_Value: 32
   accumFactor:
     m_OverrideState: 1
-    m_Value: 0.896
+    m_Value: 0.5
 --- !u!114 &6127083203623144023
 MonoBehaviour:
   m_ObjectHideFlags: 3

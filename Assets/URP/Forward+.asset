@@ -180,7 +180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0138e415fc4e0c94081ad1fcb661b240, type: 3}
   m_Name: ScreenSpaceReflectionURP
   m_EditorClassIdentifier: Assembly-CSharp::ScreenSpaceReflectionURP
-  m_Active: 0
+  m_Active: 1
   shader: {fileID: 4800000, guid: 2c5af047abe71b94b90a267f4d45d465, type: 3}
 --- !u!114 &8456717938884998189
 MonoBehaviour:
