@@ -14,18 +14,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Active: 1
   m_Settings:
-    AOMethod: 1
-    Downsample: 1
+    AOMethod: 0
+    Downsample: 0
     AfterOpaque: 0
     Source: 1
     NormalSamples: 2
-    Intensity: 1
-    DirectLightingStrength: 0
+    Intensity: 0.35
+    DirectLightingStrength: 1
     Radius: 0.2
     Samples: 0
     BlurQuality: 0
     Falloff: 100
     SampleCount: -1
+--- !u!114 &-2118444302437725960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f191ebf151246a54ba9941123eebc1ca, type: 3}
+  m_Name: CameraFadeRendererFeature
+  m_EditorClassIdentifier: com.cqf.urpcamerafade.runtime::CameraFadeRendererFeature
+  m_Active: 1
+  shader: {fileID: 4800000, guid: 079436dc522cf7e4c9be91c2b7bcecac, type: 3}
 --- !u!114 &-1117760374853251000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70,11 +84,13 @@ MonoBehaviour:
     probeVolumeBlendStatesCS: {fileID: 0}
   m_RendererFeatures:
   - {fileID: -8135757167310299317}
-  - {fileID: 8456717938884998189}
   - {fileID: 367515877368583667}
   - {fileID: 1499767318321007722}
   - {fileID: -1117760374853251000}
-  m_RendererFeatureMap: 4b9fa11ff6fb178f2df4e9e8284c5c75f3d5de47bead19056a8c430e6e3ed0144850dd78dcea7cf0
+  - {fileID: 1686037507923947356}
+  - {fileID: 2405246575203738220}
+  - {fileID: -2118444302437725960}
+  m_RendererFeatureMap: 4b9fa11ff6fb178ff3d5de47bead19056a8c430e6e3ed0144850dd78dcea7cf05cafca312e0266176c623e4004276121f8c8bf8421c699e2
   m_UseNativeRenderPass: 1
   xrSystemData: {fileID: 0}
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
@@ -99,8 +115,8 @@ MonoBehaviour:
   m_RenderingMode: 2
   m_DepthPrimingMode: 2
   m_CopyDepthMode: 2
-  m_DepthAttachmentFormat: 0
-  m_DepthTextureFormat: 0
+  m_DepthAttachmentFormat: 90
+  m_DepthTextureFormat: 90
   m_AccurateGbufferNormals: 1
   m_IntermediateTextureMode: 0
 --- !u!114 &367515877368583667
@@ -180,9 +196,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0138e415fc4e0c94081ad1fcb661b240, type: 3}
   m_Name: ScreenSpaceReflectionURP
   m_EditorClassIdentifier: Assembly-CSharp::ScreenSpaceReflectionURP
-  m_Active: 1
+  m_Active: 0
   shader: {fileID: 4800000, guid: 2c5af047abe71b94b90a267f4d45d465, type: 3}
---- !u!114 &8456717938884998189
+--- !u!114 &1686037507923947356
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -193,6 +209,20 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 56973eb0c4b2848428ff7f8480113787, type: 3}
   m_Name: OutlineRendererFeature
-  m_EditorClassIdentifier: 
-  m_Active: 0
-  outlineShader: {fileID: 4800000, guid: d5f0ed6ad64bfd74aa279f5bf5fe41f8, type: 3}
+  m_EditorClassIdentifier: com.cqf.urpoutline::OutlineRendererFeature
+  m_Active: 1
+  shader: {fileID: 4800000, guid: d5f0ed6ad64bfd74aa279f5bf5fe41f8, type: 3}
+--- !u!114 &2405246575203738220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da6b4aeab04564a419b3223b855d806b, type: 3}
+  m_Name: CustomChromaticAberrationFeature
+  m_EditorClassIdentifier: Assembly-CSharp::CustomChromaticAberrationFeature
+  m_Active: 1
+  shader: {fileID: 4800000, guid: 99fbb607dfb8047478ba227213e6fa09, type: 3}

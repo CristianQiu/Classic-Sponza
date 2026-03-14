@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a074ec59f6e910b4e8c49f57e56cf95a, type: 3}
   m_Name: VolumetricFogVolumeComponent
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricFogVolumeComponent
-  active: 1
+  active: 0
   distance:
     m_OverrideState: 0
     m_Value: 64
@@ -26,7 +26,7 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: -100000
   density:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0.25
   attenuationDistance:
     m_OverrideState: 0
@@ -36,7 +36,7 @@ MonoBehaviour:
     m_Value: {r: 0, g: 0, b: 0, a: 1}
   mainLightContribution:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1
   mainLightAnisotropy:
     m_OverrideState: 0
     m_Value: 0.4
@@ -53,14 +53,14 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: 0
   APVContributionWeight:
-    m_OverrideState: 0
-    m_Value: 0.5
+    m_OverrideState: 1
+    m_Value: 0.048
   reflectionProbesContribution:
     m_OverrideState: 1
     m_Value: 0
   reflectionProbesContributionWeight:
-    m_OverrideState: 0
-    m_Value: 0.1
+    m_OverrideState: 1
+    m_Value: 0.114
   noiseMode:
     m_OverrideState: 1
     m_Value: 0
@@ -184,6 +184,22 @@ MonoBehaviour:
     m_Value: 1
     min: 0
     max: 1
+--- !u!114 &-6475248226964356335
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d419d5a668571da438ff13b7af7630cf, type: 3}
+  m_Name: CustomChromaticAberrationVolume
+  m_EditorClassIdentifier: Assembly-CSharp::CustomChromaticAberrationVolume
+  active: 0
+  intensity:
+    m_OverrideState: 1
+    m_Value: 0.312
 --- !u!114 &-5472470096532038913
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -238,10 +254,10 @@ MonoBehaviour:
   active: 1
   postExposure:
     m_OverrideState: 1
-    m_Value: 0.5
+    m_Value: 0
   contrast:
     m_OverrideState: 1
-    m_Value: -20
+    m_Value: 50
   colorFilter:
     m_OverrideState: 0
     m_Value: {r: 1, g: 1, b: 1, a: 1}
@@ -274,58 +290,6 @@ MonoBehaviour:
   gain:
     m_OverrideState: 1
     m_Value: {x: 1, y: 1, z: 1, w: 0.05141389}
---- !u!114 &-3613994105213751816
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc91c083aaee0f24a977525131ed140f, type: 3}
-  m_Name: OutlineVolumeComponent
-  m_EditorClassIdentifier: 
-  active: 1
-  blurRadius:
-    m_OverrideState: 1
-    m_Value: 10
-  color1:
-    m_OverrideState: 1
-    m_Value: {r: 0.3, g: 0.75, b: 1, a: 1}
-  color2:
-    m_OverrideState: 1
-    m_Value: {r: 0.9736115, g: 1, b: 0.3754716, a: 1}
-  color3:
-    m_OverrideState: 1
-    m_Value: {r: 1, g: 0.5305049, b: 0.42830187, a: 1}
-  color4:
-    m_OverrideState: 1
-    m_Value: {r: 0, g: 0.83396226, b: 0.012078652, a: 1}
-  fallOff1:
-    m_OverrideState: 0
-    m_Value: 0.015
-  fallOff2:
-    m_OverrideState: 0
-    m_Value: 0.015
-  fallOff3:
-    m_OverrideState: 0
-    m_Value: 0.015
-  fallOff4:
-    m_OverrideState: 0
-    m_Value: 0.015
-  fillAlpha1:
-    m_OverrideState: 1
-    m_Value: 1
-  fillAlpha2:
-    m_OverrideState: 1
-    m_Value: 1
-  fillAlpha3:
-    m_OverrideState: 1
-    m_Value: 0.25
-  fillAlpha4:
-    m_OverrideState: 1
-    m_Value: 0.474
 --- !u!114 &-3613035041921992082
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -472,6 +436,46 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value:
       m_Bits: 4294967295
+--- !u!114 &-1139293969464926276
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc91c083aaee0f24a977525131ed140f, type: 3}
+  m_Name: OutlineVolumeComponent
+  m_EditorClassIdentifier: com.cqf.outline::OutlineVolumeComponent
+  active: 1
+  borderSize:
+    m_OverrideState: 1
+    m_Value: 3
+  color1:
+    m_OverrideState: 1
+    m_Value: {r: 1.4980392, g: 0.59734416, b: 0, a: 1}
+  color2:
+    m_OverrideState: 1
+    m_Value: {r: 0, g: 1.4980392, b: 0, a: 1}
+  color3:
+    m_OverrideState: 1
+    m_Value: {r: 0, g: 0, b: 1.4980392, a: 1}
+  color4:
+    m_OverrideState: 1
+    m_Value: {r: 1.4980392, g: 1.4980392, b: 1.4980392, a: 1}
+  fillAlpha1:
+    m_OverrideState: 1
+    m_Value: 0.433
+  fillAlpha2:
+    m_OverrideState: 1
+    m_Value: 0.409
+  fillAlpha3:
+    m_OverrideState: 1
+    m_Value: 0
+  fillAlpha4:
+    m_OverrideState: 1
+    m_Value: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -487,7 +491,6 @@ MonoBehaviour:
   components:
   - {fileID: 5886522587454456583}
   - {fileID: 418601321837692123}
-  - {fileID: -3613994105213751816}
   - {fileID: -8561978266364178982}
   - {fileID: -3613035041921992082}
   - {fileID: -5097356939715839991}
@@ -499,6 +502,9 @@ MonoBehaviour:
   - {fileID: 3165485838803951497}
   - {fileID: 4089344097709337521}
   - {fileID: -8607206919227472640}
+  - {fileID: 8182831675367992858}
+  - {fileID: -1139293969464926276}
+  - {fileID: -6475248226964356335}
 --- !u!114 &418601321837692123
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -819,7 +825,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccf1aba9553839d41ae37dd52e9ebcce, type: 3}
   m_Name: MotionBlur
   m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.MotionBlur
-  active: 0
+  active: 1
   mode:
     m_OverrideState: 1
     m_Value: 1
@@ -894,7 +900,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5cf581a29a01ac44b68486e5025db52, type: 3}
   m_Name: ScreenSpaceReflection
   m_EditorClassIdentifier: Assembly-CSharp::ScreenSpaceReflection
-  active: 1
+  active: 0
   state:
     m_OverrideState: 1
     m_Value: 1
@@ -1230,6 +1236,25 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: 1
     min: 0
+--- !u!114 &8182831675367992858
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6bdc45ca7e77154ba80c8c0eaff32ac, type: 3}
+  m_Name: CameraFadeVolumeComponent
+  m_EditorClassIdentifier: com.cqf.camerafade::CameraFadeVolumeComponent
+  active: 1
+  color:
+    m_OverrideState: 1
+    m_Value: {r: 0, g: 0, b: 0, a: 1}
+  progress:
+    m_OverrideState: 1
+    m_Value: 0.102
 --- !u!114 &8307880825781926897
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -1243,7 +1268,7 @@ MonoBehaviour:
   m_Name: OutlineVolumeComponent
   m_EditorClassIdentifier: 
   active: 1
-  blurRadius:
+  borderSize:
     m_OverrideState: 0
     m_Value: 5
   color1:
@@ -1256,20 +1281,8 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: {r: 0.3, g: 0.75, b: 1, a: 1}
   color4:
-    m_OverrideState: 1
-    m_Value: {r: 0.3, g: 0.75, b: 1, a: 1}
-  fallOff1:
     m_OverrideState: 0
-    m_Value: 0.015
-  fallOff2:
-    m_OverrideState: 0
-    m_Value: 0.015
-  fallOff3:
-    m_OverrideState: 0
-    m_Value: 0.015
-  fallOff4:
-    m_OverrideState: 0
-    m_Value: 0.015
+    m_Value: {r: 0, g: 0, b: 0, a: 1}
   fillAlpha1:
     m_OverrideState: 0
     m_Value: 0
@@ -1350,7 +1363,7 @@ MonoBehaviour:
   active: 1
   mode:
     m_OverrideState: 1
-    m_Value: 2
+    m_Value: 1
   neutralHDRRangeReductionMode:
     m_OverrideState: 0
     m_Value: 2

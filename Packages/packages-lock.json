@@ -6,7 +6,7 @@
       "source": "local",
       "dependencies": {}
     },
-    "com.cqf.urpoutline": {
+    "com.cqf.outline": {
       "version": "file:D:/Personal/Unity Packages/URP-Outline",
       "depth": 0,
       "source": "local",
@@ -17,15 +17,6 @@
       "depth": 0,
       "source": "local",
       "dependencies": {}
-    },
-    "com.sinnwrig.fogvolumes": {
-      "version": "https://github.com/sinnwrig/URP-Fog-Volumes.git",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {
-        "com.unity.render-pipelines.universal": "10.x.x"
-      },
-      "hash": "93765307b904fba177226dfba469255956e34544"
     },
     "com.unity.burst": {
       "version": "1.8.28",

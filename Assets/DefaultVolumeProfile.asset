@@ -81,7 +81,7 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: 0
   noiseTexture:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: {fileID: 0}
   noiseScale:
     m_OverrideState: 1
@@ -93,7 +93,7 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: {x: 0.1, y: -0.15, z: -0.05}
   distortionTexture:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: {fileID: 0}
   distortionScale:
     m_OverrideState: 1
@@ -107,9 +107,9 @@ MonoBehaviour:
   renderPassEvent:
     m_OverrideState: 1
     m_Value: 550
-  resolution:
+  resolutionFactor:
     m_OverrideState: 1
-    m_Value: 2
+    m_Value: 0.5
   maximumSteps:
     m_OverrideState: 1
     m_Value: 24
@@ -188,9 +188,9 @@ MonoBehaviour:
   m_Name: OutlineVolumeComponent
   m_EditorClassIdentifier: 
   active: 1
-  blurRadius:
-    m_OverrideState: 1
-    m_Value: 5
+  borderSize:
+    m_OverrideState: 0
+    m_Value: 4
   color1:
     m_OverrideState: 1
     m_Value: {r: 0.3, g: 0.75, b: 1, a: 1}
@@ -203,18 +203,6 @@ MonoBehaviour:
   color4:
     m_OverrideState: 1
     m_Value: {r: 0.3, g: 0.75, b: 1, a: 1}
-  fallOff1:
-    m_OverrideState: 1
-    m_Value: 0.015
-  fallOff2:
-    m_OverrideState: 1
-    m_Value: 0.015
-  fallOff3:
-    m_OverrideState: 1
-    m_Value: 0.015
-  fallOff4:
-    m_OverrideState: 1
-    m_Value: 0.015
   fillAlpha1:
     m_OverrideState: 1
     m_Value: 0
@@ -802,7 +790,6 @@ MonoBehaviour:
   - {fileID: 4874567631048333469}
   - {fileID: -912680511913493629}
   - {fileID: -245662248559527881}
-  - {fileID: 449949617177306429}
 --- !u!114 &144899795695697735
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -1037,9 +1024,9 @@ MonoBehaviour:
   renderPassEvent:
     m_OverrideState: 0
     m_Value: 550
-  resolution:
+  resolutionFactor:
     m_OverrideState: 0
-    m_Value: 2
+    m_Value: 0.5
   maximumSteps:
     m_OverrideState: 0
     m_Value: 24
@@ -1136,33 +1123,21 @@ MonoBehaviour:
   m_Name: OutlineVolumeComponent
   m_EditorClassIdentifier: 
   active: 1
-  blurRadius:
+  borderSize:
     m_OverrideState: 1
-    m_Value: 5
+    m_Value: 0
   color1:
     m_OverrideState: 1
-    m_Value: {r: 0.3, g: 0.75, b: 1, a: 1}
+    m_Value: {r: 1, g: 0, b: 0, a: 1}
   color2:
     m_OverrideState: 1
-    m_Value: {r: 0.3, g: 0.75, b: 1, a: 1}
+    m_Value: {r: 0, g: 1, b: 0, a: 1}
   color3:
     m_OverrideState: 1
-    m_Value: {r: 0.3, g: 0.75, b: 1, a: 1}
+    m_Value: {r: 0, g: 0, b: 1, a: 1}
   color4:
     m_OverrideState: 1
-    m_Value: {r: 0.3, g: 0.75, b: 1, a: 1}
-  fallOff1:
-    m_OverrideState: 1
-    m_Value: 0.015
-  fallOff2:
-    m_OverrideState: 1
-    m_Value: 0.015
-  fallOff3:
-    m_OverrideState: 1
-    m_Value: 0.015
-  fallOff4:
-    m_OverrideState: 1
-    m_Value: 0.015
+    m_Value: {r: 1, g: 1, b: 1, a: 1}
   fillAlpha1:
     m_OverrideState: 1
     m_Value: 0
