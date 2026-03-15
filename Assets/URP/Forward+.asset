@@ -24,7 +24,7 @@ MonoBehaviour:
     Radius: 0.2
     Samples: 0
     BlurQuality: 0
-    Falloff: 100
+    Falloff: 1000
     SampleCount: -1
 --- !u!114 &-7808950293012007926
 MonoBehaviour:
@@ -81,8 +81,7 @@ MonoBehaviour:
   m_Name: FullScreenBlurRendererFeature
   m_EditorClassIdentifier: Assembly-CSharp::FullScreenBlurRendererFeature
   m_Active: 1
-  fullScreenBlurShader: {fileID: 4800000, guid: a28858ef68f2d5448ae91611520470e5,
-    type: 3}
+  shader: {fileID: 4800000, guid: a28858ef68f2d5448ae91611520470e5, type: 3}
 --- !u!114 &-2118444302437725960
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,8 +172,8 @@ MonoBehaviour:
   m_RenderingMode: 2
   m_DepthPrimingMode: 2
   m_CopyDepthMode: 2
-  m_DepthAttachmentFormat: 90
-  m_DepthTextureFormat: 90
+  m_DepthAttachmentFormat: 0
+  m_DepthTextureFormat: 0
   m_AccurateGbufferNormals: 1
   m_IntermediateTextureMode: 0
 --- !u!114 &367515877368583667

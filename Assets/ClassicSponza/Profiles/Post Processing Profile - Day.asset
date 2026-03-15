@@ -27,7 +27,7 @@ MonoBehaviour:
     m_Value: -100000
   density:
     m_OverrideState: 1
-    m_Value: 0.126
+    m_Value: 0.643
   attenuationDistance:
     m_OverrideState: 1
     m_Value: 128
@@ -196,13 +196,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e834c4bbdea13b439294fbacf9d6030, type: 3}
   m_Name: FullScreenBlurVolumeComponent
   m_EditorClassIdentifier: Assembly-CSharp::FullScreenBlurVolumeComponent
-  active: 1
+  active: 0
   progress:
-    m_OverrideState: 0
-    m_Value: 0
+    m_OverrideState: 1
+    m_Value: 0.174
   blurRadius:
-    m_OverrideState: 0
-    m_Value: 8
+    m_OverrideState: 1
+    m_Value: 1
 --- !u!114 &-5472470096532038913
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -308,7 +308,7 @@ MonoBehaviour:
   active: 1
   intensity:
     m_OverrideState: 1
-    m_Value: 0.195
+    m_Value: 0.027
 --- !u!114 &-3613035041921992082
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -513,10 +513,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc91c083aaee0f24a977525131ed140f, type: 3}
   m_Name: OutlineVolumeComponent
   m_EditorClassIdentifier: com.cqf.outline::OutlineVolumeComponent
-  active: 1
+  active: 0
   borderSize:
     m_OverrideState: 1
-    m_Value: 4
+    m_Value: 3
   color1:
     m_OverrideState: 1
     m_Value: {r: 2.433572, g: 0.9703885, b: 0, a: 1}
@@ -531,16 +531,16 @@ MonoBehaviour:
     m_Value: {r: 1.4980392, g: 1.4980392, b: 1.4980392, a: 1}
   fillAlpha1:
     m_OverrideState: 1
-    m_Value: 0.558
+    m_Value: 0.244
   fillAlpha2:
     m_OverrideState: 1
-    m_Value: 0.76
+    m_Value: 0.463
   fillAlpha3:
     m_OverrideState: 1
-    m_Value: 0.662
+    m_Value: 0.166
   fillAlpha4:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 0.271
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -747,7 +747,7 @@ MonoBehaviour:
     m_Value: {x: 0.5, y: 0.5}
   intensity:
     m_OverrideState: 1
-    m_Value: 0.073
+    m_Value: 0.2
   smoothness:
     m_OverrideState: 1
     m_Value: 0.2
@@ -906,13 +906,13 @@ MonoBehaviour:
     m_Value: 1
   threshold:
     m_OverrideState: 1
-    m_Value: 0.95
+    m_Value: 1
   intensity:
     m_OverrideState: 1
-    m_Value: 0.975
+    m_Value: 1.25
   scatter:
     m_OverrideState: 1
-    m_Value: 0.7
+    m_Value: 0.5
   clamp:
     m_OverrideState: 1
     m_Value: 65472
@@ -930,7 +930,7 @@ MonoBehaviour:
     m_Value: 0
   maxIterations:
     m_OverrideState: 1
-    m_Value: 6
+    m_Value: 8
   dirtTexture:
     m_OverrideState: 0
     m_Value: {fileID: 0}
@@ -1009,7 +1009,7 @@ MonoBehaviour:
   active: 0
   mode:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 2
   gaussianStart:
     m_OverrideState: 1
     m_Value: 5.06
@@ -1024,7 +1024,7 @@ MonoBehaviour:
     m_Value: 1
   focusDistance:
     m_OverrideState: 1
-    m_Value: 5.75
+    m_Value: 3.45
   aperture:
     m_OverrideState: 1
     m_Value: 10.8
@@ -1320,7 +1320,7 @@ MonoBehaviour:
     m_Value: {r: 0, g: 0, b: 0, a: 1}
   progress:
     m_OverrideState: 1
-    m_Value: 0.056
+    m_Value: 0.248
 --- !u!114 &8307880825781926897
 MonoBehaviour:
   m_ObjectHideFlags: 3

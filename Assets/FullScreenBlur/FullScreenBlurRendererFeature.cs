@@ -12,10 +12,11 @@ public sealed class FullScreenBlurRendererFeature : ScriptableRendererFeature
 	#region Private Attributes
 
 	[HideInInspector]
-	[SerializeField] private Shader fullScreenBlurShader;
+	[SerializeField] private Shader shader;
 
-	private Material fullScreenBlurMaterial;
-	private FullScreenBlurRenderPass fullScreenBlurRenderPass;
+	private Material material;
+
+	private FullScreenBlurRenderPass renderPass;
 
 	#endregion
 
@@ -26,9 +27,9 @@ public sealed class FullScreenBlurRendererFeature : ScriptableRendererFeature
 	/// </summary>
 	public override void Create()
 	{
-		ValidateResourcesForFullScreenBlurRenderPass(true);
+		ValidateResources(true);
 
-		fullScreenBlurRenderPass = new FullScreenBlurRenderPass(fullScreenBlurMaterial);
+		renderPass = new FullScreenBlurRenderPass(material);
 	}
 
 	/// <summary>
@@ -39,10 +40,10 @@ public sealed class FullScreenBlurRendererFeature : ScriptableRendererFeature
 	public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData)
 	{
 		bool isPostProcessEnabled = renderingData.postProcessingEnabled && renderingData.cameraData.postProcessEnabled;
-		bool shouldAddFullScreenBlurRenderPass = isPostProcessEnabled && ShouldAddFullScreenBlurRenderPass(renderingData.cameraData.cameraType);
+		bool shouldAddRenderPass = isPostProcessEnabled && ShouldAddRenderPass(renderingData.cameraData.cameraType);
 
-		if (shouldAddFullScreenBlurRenderPass)
-			renderer.EnqueuePass(fullScreenBlurRenderPass);
+		if (shouldAddRenderPass)
+			renderer.EnqueuePass(renderPass);
 	}
 
 	/// <summary>
@@ -53,7 +54,7 @@ public sealed class FullScreenBlurRendererFeature : ScriptableRendererFeature
 	{
 		base.Dispose(disposing);
 
-		CoreUtils.Destroy(fullScreenBlurMaterial);
+		CoreUtils.Destroy(material);
 	}
 
 	#endregion
@@ -61,38 +62,39 @@ public sealed class FullScreenBlurRendererFeature : ScriptableRendererFeature
 	#region Methods
 
 	/// <summary>
-	/// Validates the resources used by the full screen blur render pass.
+	/// Validates the resources used by the render pass.
 	/// </summary>
 	/// <param name="forceRefresh"></param>
 	/// <returns></returns>
-	private bool ValidateResourcesForFullScreenBlurRenderPass(bool forceRefresh)
+	private bool ValidateResources(bool forceRefresh)
 	{
 		if (forceRefresh)
 		{
 #if UNITY_EDITOR
-			fullScreenBlurShader = Shader.Find("Hidden/FullScreenBlur");
+			shader = Shader.Find("Hidden/FullScreenBlur");
 #endif
-			CoreUtils.Destroy(fullScreenBlurMaterial);
-			fullScreenBlurMaterial = CoreUtils.CreateEngineMaterial(fullScreenBlurShader);
+			CoreUtils.Destroy(material);
+			material = CoreUtils.CreateEngineMaterial(shader);
 		}
 
-		return fullScreenBlurShader != null && fullScreenBlurMaterial != null;
+		return shader != null && material != null;
 	}
 
 	/// <summary>
-	/// Gets whether the full screen blur render pass should be enqueued to the renderer.
+	/// Gets whether the render pass should be enqueued to the renderer.
 	/// </summary>
 	/// <param name="cameraType"></param>
 	/// <returns></returns>
-	private bool ShouldAddFullScreenBlurRenderPass(CameraType cameraType)
+	private bool ShouldAddRenderPass(CameraType cameraType)
 	{
-		FullScreenBlurVolumeComponent fullScreenBlurVolumeComponent = VolumeManager.instance.stack.GetComponent<FullScreenBlurVolumeComponent>();
+		FullScreenBlurVolumeComponent volume = VolumeManager.instance.stack.GetComponent<FullScreenBlurVolumeComponent>();
 
-		bool isVolumeOk = fullScreenBlurVolumeComponent != null && fullScreenBlurVolumeComponent.IsActive();
-		bool isCameraOk = cameraType != CameraType.Preview && cameraType != CameraType.Reflection && cameraType != CameraType.SceneView;
-		bool areResourcesOk = ValidateResourcesForFullScreenBlurRenderPass(false);
+		bool isVolumeOk = volume != null && volume.IsActive();
+		bool isRenderPassOk = renderPass != null;
+		bool areResourcesOk = ValidateResources(false);
+		bool isCameraOk = cameraType != CameraType.Preview && cameraType != CameraType.Reflection;
 
-		return isActive && isVolumeOk && isCameraOk && areResourcesOk;
+		return isActive && isVolumeOk && isRenderPassOk && areResourcesOk && isCameraOk;
 	}
 
 	#endregion
