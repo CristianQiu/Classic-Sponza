@@ -12,8 +12,7 @@ public sealed class FullScreenBlurVolumeComponent : VolumeComponent, IPostProces
 {
 	#region Public Attributes
 
-	public ClampedFloatParameter progress = new ClampedFloatParameter(0.0f, 0.0f, 1.0f);
-	public ClampedFloatParameter blurRadius = new ClampedFloatParameter(1.0f, 0.0f, 16.0f);
+	public ClampedFloatParameter intensity = new ClampedFloatParameter(0.0f, 0.0f, 1.0f);
 
 	#endregion
 
@@ -25,7 +24,7 @@ public sealed class FullScreenBlurVolumeComponent : VolumeComponent, IPostProces
 	/// <returns></returns>
 	public bool IsActive()
 	{
-		return progress.value > 0.0f;
+		return intensity.value > 0.0f;
 	}
 
 	#endregion
