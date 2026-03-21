@@ -12,6 +12,12 @@
       "source": "local",
       "dependencies": {}
     },
+    "com.cqf.fullscreenblur": {
+      "version": "file:D:/Personal/Unity Packages/URP-Full-Screen-Blur",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
     "com.cqf.outline": {
       "version": "file:D:/Personal/Unity Packages/URP-Outline",
       "depth": 0,

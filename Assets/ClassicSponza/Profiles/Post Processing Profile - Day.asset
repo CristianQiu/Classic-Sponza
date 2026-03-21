@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a074ec59f6e910b4e8c49f57e56cf95a, type: 3}
   m_Name: VolumetricFogVolumeComponent
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricFogVolumeComponent
-  active: 1
+  active: 0
   distance:
     m_OverrideState: 0
     m_Value: 64
@@ -27,7 +27,7 @@ MonoBehaviour:
     m_Value: -100000
   density:
     m_OverrideState: 1
-    m_Value: 0.643
+    m_Value: 0.115
   attenuationDistance:
     m_OverrideState: 1
     m_Value: 128
@@ -38,8 +38,8 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: 1
   mainLightAnisotropy:
-    m_OverrideState: 0
-    m_Value: 0.4
+    m_OverrideState: 1
+    m_Value: 0.379
   mainLightScattering:
     m_OverrideState: 1
     m_Value: 0.97
@@ -92,7 +92,7 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 550
   resolutionFactor:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0.5
   maximumSteps:
     m_OverrideState: 0
@@ -184,6 +184,25 @@ MonoBehaviour:
     m_Value: 1
     min: 0
     max: 1
+--- !u!114 &-7555635386795696767
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06f356d76c39a9c4ca85fd09c03b9977, type: 3}
+  m_Name: ChromaticAberrationVolume
+  m_EditorClassIdentifier: Cqf.ChromaticAberration::ChromaticAberrationVolume
+  active: 1
+  displacement:
+    m_OverrideState: 1
+    m_Value: 0.059
+  intensity:
+    m_OverrideState: 1
+    m_Value: 1
 --- !u!114 &-6500422364893164488
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -196,13 +215,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e834c4bbdea13b439294fbacf9d6030, type: 3}
   m_Name: FullScreenBlurVolumeComponent
   m_EditorClassIdentifier: Assembly-CSharp::FullScreenBlurVolumeComponent
-  active: 1
-  blurIntensity:
+  active: 0
+  <displayName>k__BackingField: 
+  intensity:
+    <fieldHash>k__BackingField: -1705265880
     m_OverrideState: 1
-    m_Value: 1.74
-  progress:
+    m_Value: 0
+  passes:
+    <fieldHash>k__BackingField: -1465915488
     m_OverrideState: 1
-    m_Value: 0.696
+    m_Value: 1
 --- !u!114 &-5472470096532038913
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -260,7 +282,7 @@ MonoBehaviour:
     m_Value: 0
   contrast:
     m_OverrideState: 1
-    m_Value: 25
+    m_Value: 31.9
   colorFilter:
     m_OverrideState: 0
     m_Value: {r: 1, g: 1, b: 1, a: 1}
@@ -293,22 +315,6 @@ MonoBehaviour:
   gain:
     m_OverrideState: 1
     m_Value: {x: 1, y: 1, z: 1, w: 0.05141389}
---- !u!114 &-3712917813153835361
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06f356d76c39a9c4ca85fd09c03b9977, type: 3}
-  m_Name: ChromaticAberrationVolume
-  m_EditorClassIdentifier: Cqf.ChromaticAberration::ChromaticAberrationVolume
-  active: 1
-  intensity:
-    m_OverrideState: 1
-    m_Value: 1
 --- !u!114 &-3613035041921992082
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -516,7 +522,7 @@ MonoBehaviour:
   active: 1
   borderSize:
     m_OverrideState: 1
-    m_Value: 6.57
+    m_Value: 8.88
   color1:
     m_OverrideState: 1
     m_Value: {r: 2.433572, g: 0.9703885, b: 0, a: 1}
@@ -531,7 +537,7 @@ MonoBehaviour:
     m_Value: {r: 1.4980392, g: 1.4980392, b: 1.4980392, a: 1}
   fillAlpha1:
     m_OverrideState: 1
-    m_Value: 0.244
+    m_Value: 0.598
   fillAlpha2:
     m_OverrideState: 1
     m_Value: 0.463
@@ -569,8 +575,8 @@ MonoBehaviour:
   - {fileID: -1139293969464926276}
   - {fileID: -2772238963628681896}
   - {fileID: 7994589520800418629}
-  - {fileID: -3712917813153835361}
-  - {fileID: -6500422364893164488}
+  - {fileID: -7555635386795696767}
+  - {fileID: 2380741362329632838}
 --- !u!114 &418601321837692123
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -617,6 +623,25 @@ MonoBehaviour:
   worldOffset:
     m_OverrideState: 0
     m_Value: {x: 0, y: 0, z: 0}
+--- !u!114 &2380741362329632838
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19a83e1d505eb854bbf6649a15599f1a, type: 3}
+  m_Name: FullScreenBlurVolumeComponent
+  m_EditorClassIdentifier: Cqf.FullScreenBlur::FullScreenBlurVolumeComponent
+  active: 1
+  intensity:
+    m_OverrideState: 1
+    m_Value: 0
+  passes:
+    m_OverrideState: 1
+    m_Value: 1
 --- !u!114 &2679483305229509213
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -912,7 +937,7 @@ MonoBehaviour:
     m_Value: 1.25
   scatter:
     m_OverrideState: 1
-    m_Value: 0.5
+    m_Value: 0.627
   clamp:
     m_OverrideState: 1
     m_Value: 65472
@@ -923,14 +948,14 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: 1
   filter:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0
   downscale:
     m_OverrideState: 0
     m_Value: 0
   maxIterations:
     m_OverrideState: 1
-    m_Value: 8
+    m_Value: 6
   dirtTexture:
     m_OverrideState: 0
     m_Value: {fileID: 0}
@@ -951,6 +976,9 @@ MonoBehaviour:
   m_Name: ChromaticAberrationVolume
   m_EditorClassIdentifier: Cqf.ChromaticAberration::ChromaticAberrationVolume
   active: 1
+  displacement:
+    m_OverrideState: 0
+    m_Value: 0
   intensity:
     m_OverrideState: 1
     m_Value: 0.142
@@ -1058,7 +1086,7 @@ MonoBehaviour:
     m_Value: 0
   intensity:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0.258
   response:
     m_OverrideState: 1
     m_Value: 1
@@ -1320,7 +1348,7 @@ MonoBehaviour:
     m_Value: {r: 0, g: 0, b: 0, a: 1}
   progress:
     m_OverrideState: 1
-    m_Value: 0.458
+    m_Value: 0
 --- !u!114 &8307880825781926897
 MonoBehaviour:
   m_ObjectHideFlags: 3

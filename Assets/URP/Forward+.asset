@@ -15,7 +15,7 @@ MonoBehaviour:
   m_Active: 1
   m_Settings:
     AOMethod: 1
-    Downsample: 0
+    Downsample: 1
     AfterOpaque: 0
     Source: 1
     NormalSamples: 2
@@ -68,7 +68,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Cqf.ChromaticAberration::ChromaticAberrationFeature
   m_Active: 1
   shader: {fileID: 4800000, guid: dfeda81a55e0421458c52c657987365f, type: 3}
---- !u!114 &-3418605613827957829
+--- !u!114 &-3627013809836168037
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -77,11 +77,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93cc4d3934680654aaa72f1e89284b89, type: 3}
+  m_Script: {fileID: 11500000, guid: 3a88d7f738906f047a02cbffdf6c68b3, type: 3}
   m_Name: FullScreenBlurRendererFeature
-  m_EditorClassIdentifier: Assembly-CSharp::FullScreenBlurRendererFeature
+  m_EditorClassIdentifier: Cqf.FullScreenBlur::FullScreenBlurRendererFeature
   m_Active: 1
-  shader: {fileID: 4800000, guid: a28858ef68f2d5448ae91611520470e5, type: 3}
+  shader: {fileID: 4800000, guid: 52bbd3f3554626747a8b0ef07120e305, type: 3}
 --- !u!114 &-2118444302437725960
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,8 +146,8 @@ MonoBehaviour:
   - {fileID: 1686037507923947356}
   - {fileID: -7467311065034896554}
   - {fileID: -2118444302437725960}
-  - {fileID: -3418605613827957829}
-  m_RendererFeatureMap: 4b9fa11ff6fb178ff3d5de47bead19056a8c430e6e3ed0144850dd78dcea7cf05cafca312e026617564b405d26c85e98f8c8bf8421c699e2bbdba0884eac8ed0
+  - {fileID: -3627013809836168037}
+  m_RendererFeatureMap: 4b9fa11ff6fb178ff3d5de47bead19056a8c430e6e3ed0144850dd78dcea7cf05cafca312e026617564b405d26c85e98f8c8bf8421c699e29b6c471d2842aacd
   m_UseNativeRenderPass: 1
   xrSystemData: {fileID: 0}
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
