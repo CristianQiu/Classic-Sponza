@@ -1,5 +1,45 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-9009861709036476659
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5cf581a29a01ac44b68486e5025db52, type: 3}
+  m_Name: ScreenSpaceReflection
+  m_EditorClassIdentifier: Assembly-CSharp::ScreenSpaceReflection
+  active: 1
+  state:
+    m_OverrideState: 1
+    m_Value: 0
+  resolution:
+    m_OverrideState: 1
+    m_Value: 2
+  minSmoothness:
+    m_OverrideState: 1
+    m_Value: 0.33
+  fadeSmoothness:
+    m_OverrideState: 1
+    m_Value: 0.6
+  edgeFade:
+    m_OverrideState: 1
+    m_Value: 0.1
+  thickness:
+    m_OverrideState: 1
+    m_Value: 0.25
+  quality:
+    m_OverrideState: 1
+    m_Value: 0
+  maxStep:
+    m_OverrideState: 1
+    m_Value: 16
+  accumFactor:
+    m_OverrideState: 1
+    m_Value: 0.75
 --- !u!114 &-7360464433392047764
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -789,7 +829,9 @@ MonoBehaviour:
   - {fileID: -7277375777826075486}
   - {fileID: 4874567631048333469}
   - {fileID: -912680511913493629}
-  - {fileID: -245662248559527881}
+  - {fileID: 3594415324716839822}
+  - {fileID: 6086280259887118446}
+  - {fileID: -9009861709036476659}
 --- !u!114 &144899795695697735
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -1082,6 +1124,25 @@ MonoBehaviour:
   blueOutBlueIn:
     m_OverrideState: 1
     m_Value: 100
+--- !u!114 &3594415324716839822
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19a83e1d505eb854bbf6649a15599f1a, type: 3}
+  m_Name: FullScreenBlurVolumeComponent
+  m_EditorClassIdentifier: Cqf.FullScreenBlur::FullScreenBlurVolumeComponent
+  active: 1
+  intensity:
+    m_OverrideState: 1
+    m_Value: 0
+  passes:
+    m_OverrideState: 1
+    m_Value: 2
 --- !u!114 &4707900126849591239
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -1170,6 +1231,25 @@ MonoBehaviour:
   contribution:
     m_OverrideState: 1
     m_Value: 0
+--- !u!114 &6086280259887118446
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06f356d76c39a9c4ca85fd09c03b9977, type: 3}
+  m_Name: ChromaticAberrationVolume
+  m_EditorClassIdentifier: Cqf.ChromaticAberration::ChromaticAberrationVolume
+  active: 1
+  displacement:
+    m_OverrideState: 1
+    m_Value: 0
+  intensity:
+    m_OverrideState: 1
+    m_Value: 1
 --- !u!114 &6231561695439811588
 MonoBehaviour:
   m_ObjectHideFlags: 3

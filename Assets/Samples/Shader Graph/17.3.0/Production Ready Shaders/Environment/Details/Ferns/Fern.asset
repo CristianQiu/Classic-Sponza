@@ -23,18 +23,13 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Fern
-  m_Shader: {fileID: -6465566751694194690, guid: dfa3b96612ed4df4a97b7fd06217ba23,
-    type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: dfa3b96612ed4df4a97b7fd06217ba23, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _ALPHATEST_ON
-  - _DISABLE_DECALS
-  - _DISABLE_SSR
-  - _DISABLE_SSR_TRANSPARENT
-  - _DOUBLESIDED_ON
   m_InvalidKeywords: []
-  m_LightmapFlags: 0
+  m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 1
   m_CustomRenderQueue: 2450
@@ -57,22 +52,26 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_8713F080:
-        m_Texture: {fileID: 2800000, guid: 55e94088b00bd354ba9333979ca1f8fa, type: 3}
+        m_Texture: {fileID: 2800000, guid: daa49585c030643489dad5c6e4680dca, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_9DCAAA49:
-        m_Texture: {fileID: 2800000, guid: 6e96a13009e427342b5fb18df6af5f43, type: 3}
+        m_Texture: {fileID: 2800000, guid: 8cb2914aba3e5d545bb189195869f9f4, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_A5E0646:
-        m_Texture: {fileID: 2800000, guid: aac60b0547f380d4db22446a7ad21c64, type: 3}
+        m_Texture: {fileID: 2800000, guid: d5a7b708862dd0a449b4bccbefdd2335, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_E1B0D043:
-        m_Texture: {fileID: 2800000, guid: 7a5ed5fcf4e7c184ba836a7a11012f69, type: 3}
+        m_Texture: {fileID: 2800000, guid: f3661c5aa3d7dc141aebd059ea67047b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SampleTexture2DLOD_4ce76fe7821749c5a93282810d6e42f2_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 02fd33ef9ed967d4aa71fb7beaf2e4df, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2DLOD_4ce76fe7821749c5a93282810d6e42f2_Texture_1_Texture2D:
         m_Texture: {fileID: 2800000, guid: 02fd33ef9ed967d4aa71fb7beaf2e4df, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -95,8 +94,8 @@ Material:
     m_Ints: []
     m_Floats:
     - Animation_Cutoff: 30
-    - Distance_Fade_End: 140
-    - Distance_Fade_Start: 40
+    - Distance_Fade_End: 200
+    - Distance_Fade_Start: 50
     - Dither_Scale: 2.108
     - Enable_Blend_Terrain_Color: 0
     - Terrain_Blend_A: 0
@@ -135,19 +134,14 @@ Material:
     - _DoubleSidedGIMode: 0
     - _DoubleSidedNormalMode: 1
     - _DstBlend: 0
-    - _DstBlend2: 0
     - _ENVIRONMENTREFLECTIONS_OFF: 1
     - _EnableBlendModePreserveSpecularLighting: 1
     - _EnableFogOnTransparent: 1
-    - _ExcludeFromTUAndAA: 0
     - _FadeBias: 0.5
     - _ForceForwardEmissive: 0
     - _GrassNormal: 0
-    - _GroundFalloff: 0.2
-    - _MaterialID: 1
-    - _MaterialTypeMask: 2
+    - _GroundFalloff: 2
     - _OpaqueCullMode: 2
-    - _PerPixelSorting: 0
     - _QueueControl: 1
     - _QueueOffset: 0
     - _RayTracing: 0
@@ -166,14 +160,13 @@ Material:
     - _StencilRefGBuffer: 2
     - _StencilRefMV: 32
     - _StencilWriteMask: 6
-    - _StencilWriteMaskDepth: 9
+    - _StencilWriteMaskDepth: 8
     - _StencilWriteMaskDistortionVec: 4
-    - _StencilWriteMaskGBuffer: 15
-    - _StencilWriteMaskMV: 41
+    - _StencilWriteMaskGBuffer: 14
+    - _StencilWriteMaskMV: 40
     - _SupportDecals: 0
     - _Surface: 0
     - _SurfaceType: 0
-    - _TransmissionEnable: 1
     - _TransparentBackfaceEnable: 0
     - _TransparentCullMode: 2
     - _TransparentDepthPostpassEnable: 0
@@ -190,17 +183,16 @@ Material:
     - _ZWrite: 1
     - _ZWriteControl: 0
     m_Colors:
-    - Fade_Color: {r: 0, g: 0, b: 0, a: 0}
+    - Fade_Color: {r: 1, g: 1, b: 1, a: 0}
     - SplatA: {r: 0, g: 0, b: 0, a: 0}
     - SplatB: {r: 0, g: 0, b: 0, a: 0}
     - SplatG: {r: 0, g: 0, b: 0, a: 0}
     - SplatR: {r: 0, g: 0, b: 0, a: 0}
     - Terrain_Origin: {r: 0, g: 0, b: 0, a: 0}
     - Terrain_Scale: {r: 0, g: 0, b: 0, a: 0}
-    - _AORemap: {r: 0.1, g: 1, b: 0, a: 0}
+    - _AORemap: {r: 0.3, g: 1, b: 0, a: 0}
     - _BlendScale: {r: 2, g: 2, b: 0, a: 0}
-    - _DiffusionProfileAsset: {r: -5.7855046e-23, g: -2.7243504e-36, b: -1.8891285e+22,
-        a: -12817017}
+    - _DiffusionProfileAsset: {r: -5.7855046e-23, g: -2.7243504e-36, b: -1.8891285e+22, a: -12817017}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _SSSColor: {r: 2, g: 2, b: 2, a: 1}

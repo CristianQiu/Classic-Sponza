@@ -1,114 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8607206919227472640
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a074ec59f6e910b4e8c49f57e56cf95a, type: 3}
-  m_Name: VolumetricFogVolumeComponent
-  m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricFogVolumeComponent
-  active: 0
-  distance:
-    m_OverrideState: 0
-    m_Value: 64
-  baseHeight:
-    m_OverrideState: 1
-    m_Value: 0
-  maximumHeight:
-    m_OverrideState: 1
-    m_Value: 50
-  groundHeight:
-    m_OverrideState: 0
-    m_Value: -100000
-  density:
-    m_OverrideState: 1
-    m_Value: 0.115
-  attenuationDistance:
-    m_OverrideState: 1
-    m_Value: 128
-  ambienceColor:
-    m_OverrideState: 0
-    m_Value: {r: 0, g: 0, b: 0, a: 1}
-  mainLightContribution:
-    m_OverrideState: 1
-    m_Value: 1
-  mainLightAnisotropy:
-    m_OverrideState: 1
-    m_Value: 0.379
-  mainLightScattering:
-    m_OverrideState: 1
-    m_Value: 0.97
-  mainLightTint:
-    m_OverrideState: 1
-    m_Value: {r: 1, g: 1, b: 1, a: 1}
-  additionalLightsContribution:
-    m_OverrideState: 1
-    m_Value: 0
-  APVContribution:
-    m_OverrideState: 1
-    m_Value: 0
-  APVContributionWeight:
-    m_OverrideState: 1
-    m_Value: 0.048
-  reflectionProbesContribution:
-    m_OverrideState: 1
-    m_Value: 0
-  reflectionProbesContributionWeight:
-    m_OverrideState: 1
-    m_Value: 0.114
-  noiseMode:
-    m_OverrideState: 1
-    m_Value: 0
-  noiseTexture:
-    m_OverrideState: 0
-    m_Value: {fileID: 0}
-  noiseScale:
-    m_OverrideState: 0
-    m_Value: 2.5
-  noiseMinMax:
-    m_OverrideState: 0
-    m_Value: {x: -0.75, y: 2.5}
-  noiseVelocity:
-    m_OverrideState: 0
-    m_Value: {x: 0.1, y: -0.15, z: -0.05}
-  distortionTexture:
-    m_OverrideState: 0
-    m_Value: {fileID: 0}
-  distortionScale:
-    m_OverrideState: 0
-    m_Value: 5
-  distortionIntensity:
-    m_OverrideState: 0
-    m_Value: {x: 0.1, y: -0.1, z: 0.05}
-  distortionVelocity:
-    m_OverrideState: 0
-    m_Value: {x: -0.02, y: 0.01, z: 0.015}
-  renderPassEvent:
-    m_OverrideState: 0
-    m_Value: 550
-  resolutionFactor:
-    m_OverrideState: 1
-    m_Value: 0.5
-  maximumSteps:
-    m_OverrideState: 0
-    m_Value: 24
-  minimumStepSize:
-    m_OverrideState: 0
-    m_Value: 0.25
-  blurIterations:
-    m_OverrideState: 0
-    m_Value: 2
-  reprojection:
-    m_OverrideState: 1
-    m_Value: 0
-  enabled:
-    m_OverrideState: 1
-    m_Value: 1
 --- !u!114 &-8561978266364178982
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -196,10 +87,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06f356d76c39a9c4ca85fd09c03b9977, type: 3}
   m_Name: ChromaticAberrationVolume
   m_EditorClassIdentifier: Cqf.ChromaticAberration::ChromaticAberrationVolume
-  active: 1
+  active: 0
   displacement:
     m_OverrideState: 1
-    m_Value: 0.059
+    m_Value: 0.121
   intensity:
     m_OverrideState: 1
     m_Value: 1
@@ -410,6 +301,115 @@ MonoBehaviour:
   scale:
     m_OverrideState: 0
     m_Value: 1
+--- !u!114 &-2631820885816993835
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a074ec59f6e910b4e8c49f57e56cf95a, type: 3}
+  m_Name: VolumetricFogVolumeComponent
+  m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricFogVolumeComponent
+  active: 1
+  distance:
+    m_OverrideState: 0
+    m_Value: 64
+  baseHeight:
+    m_OverrideState: 0
+    m_Value: 0
+  maximumHeight:
+    m_OverrideState: 0
+    m_Value: 50
+  groundHeight:
+    m_OverrideState: 0
+    m_Value: -100000
+  density:
+    m_OverrideState: 1
+    m_Value: 0.017
+  attenuationDistance:
+    m_OverrideState: 1
+    m_Value: 187
+  ambienceColor:
+    m_OverrideState: 0
+    m_Value: {r: 0, g: 0, b: 0, a: 1}
+  mainLightContribution:
+    m_OverrideState: 1
+    m_Value: 1
+  mainLightAnisotropy:
+    m_OverrideState: 1
+    m_Value: 0
+  mainLightScattering:
+    m_OverrideState: 1
+    m_Value: 1
+  mainLightTint:
+    m_OverrideState: 0
+    m_Value: {r: 1, g: 1, b: 1, a: 1}
+  additionalLightsContribution:
+    m_OverrideState: 1
+    m_Value: 1
+  APVContribution:
+    m_OverrideState: 0
+    m_Value: 0
+  APVContributionWeight:
+    m_OverrideState: 0
+    m_Value: 0.5
+  reflectionProbesContribution:
+    m_OverrideState: 0
+    m_Value: 0
+  reflectionProbesContributionWeight:
+    m_OverrideState: 0
+    m_Value: 0.1
+  noiseMode:
+    m_OverrideState: 0
+    m_Value: 0
+  noiseTexture:
+    m_OverrideState: 0
+    m_Value: {fileID: 0}
+  noiseScale:
+    m_OverrideState: 0
+    m_Value: 2.5
+  noiseMinMax:
+    m_OverrideState: 0
+    m_Value: {x: -0.75, y: 2.5}
+  noiseVelocity:
+    m_OverrideState: 0
+    m_Value: {x: 0.1, y: -0.15, z: -0.05}
+  distortionTexture:
+    m_OverrideState: 0
+    m_Value: {fileID: 0}
+  distortionScale:
+    m_OverrideState: 0
+    m_Value: 5
+  distortionIntensity:
+    m_OverrideState: 0
+    m_Value: {x: 0.1, y: -0.1, z: 0.05}
+  distortionVelocity:
+    m_OverrideState: 0
+    m_Value: {x: -0.02, y: 0.01, z: 0.015}
+  renderPassEvent:
+    m_OverrideState: 0
+    m_Value: 550
+  resolutionFactor:
+    m_OverrideState: 0
+    m_Value: 0.5
+  maximumSteps:
+    m_OverrideState: 0
+    m_Value: 24
+  minimumStepSize:
+    m_OverrideState: 0
+    m_Value: 0.25
+  blurIterations:
+    m_OverrideState: 0
+    m_Value: 2
+  reprojection:
+    m_OverrideState: 0
+    m_Value: 0
+  enabled:
+    m_OverrideState: 1
+    m_Value: 1
 --- !u!114 &-2456994947504409299
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -428,6 +428,46 @@ MonoBehaviour:
     <fieldHash>k__BackingField: -384964080
     m_OverrideState: 1
     m_Value: 0.025
+--- !u!114 &-2138885805427019201
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc91c083aaee0f24a977525131ed140f, type: 3}
+  m_Name: OutlineVolumeComponent
+  m_EditorClassIdentifier: com.cqf.outline::OutlineVolumeComponent
+  active: 0
+  borderSize:
+    m_OverrideState: 1
+    m_Value: 5
+  color1:
+    m_OverrideState: 0
+    m_Value: {r: 1, g: 0, b: 0, a: 1}
+  color2:
+    m_OverrideState: 0
+    m_Value: {r: 0, g: 1, b: 0, a: 1}
+  color3:
+    m_OverrideState: 0
+    m_Value: {r: 0, g: 0, b: 1, a: 1}
+  color4:
+    m_OverrideState: 1
+    m_Value: {r: 1, g: 1, b: 1, a: 1}
+  fillAlpha1:
+    m_OverrideState: 1
+    m_Value: 0.395
+  fillAlpha2:
+    m_OverrideState: 1
+    m_Value: 0.275
+  fillAlpha3:
+    m_OverrideState: 1
+    m_Value: 0
+  fillAlpha4:
+    m_OverrideState: 1
+    m_Value: 0
 --- !u!114 &-1736120813783099337
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -522,7 +562,7 @@ MonoBehaviour:
   active: 1
   borderSize:
     m_OverrideState: 1
-    m_Value: 8.88
+    m_Value: 3
   color1:
     m_OverrideState: 1
     m_Value: {r: 2.433572, g: 0.9703885, b: 0, a: 1}
@@ -560,7 +600,6 @@ MonoBehaviour:
   m_Name: Post Processing Profile - Day
   m_EditorClassIdentifier: 
   components:
-  - {fileID: 5886522587454456583}
   - {fileID: 418601321837692123}
   - {fileID: -8561978266364178982}
   - {fileID: -3613035041921992082}
@@ -571,12 +610,12 @@ MonoBehaviour:
   - {fileID: 6290322969746694187}
   - {fileID: 3165485838803951497}
   - {fileID: 4089344097709337521}
-  - {fileID: -8607206919227472640}
-  - {fileID: -1139293969464926276}
   - {fileID: -2772238963628681896}
   - {fileID: 7994589520800418629}
   - {fileID: -7555635386795696767}
   - {fileID: 2380741362329632838}
+  - {fileID: -2138885805427019201}
+  - {fileID: -2631820885816993835}
 --- !u!114 &418601321837692123
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -641,7 +680,7 @@ MonoBehaviour:
     m_Value: 0
   passes:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 2
 --- !u!114 &2679483305229509213
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -675,30 +714,30 @@ MonoBehaviour:
     m_Value: 40.33
   ambienceColor:
     m_OverrideState: 0
-    m_Value: {r: 0, g: 0.26315784, b: 1, a: 0.05882353}
+    m_Value: {r: 0, g: 0, b: 0, a: 1}
   mainLightContribution:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0
   mainLightAnisotropy:
-    m_OverrideState: 1
-    m_Value: -0.171
+    m_OverrideState: 0
+    m_Value: 0.4
   mainLightScattering:
-    m_OverrideState: 1
-    m_Value: 0.04
+    m_OverrideState: 0
+    m_Value: 0.75
   mainLightTint:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: {r: 1, g: 1, b: 1, a: 1}
   additionalLightsContribution:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0
   APVContribution:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0
   APVContributionWeight:
     m_OverrideState: 0
     m_Value: 1
   reflectionProbesContribution:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0
   reflectionProbesContributionWeight:
     m_OverrideState: 0
@@ -713,8 +752,8 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 2.5
   noiseMinMax:
-    m_OverrideState: 1
-    m_Value: {x: -0.75971395, y: 2.5000002}
+    m_OverrideState: 0
+    m_Value: {x: -0.75, y: 2.5}
   noiseVelocity:
     m_OverrideState: 0
     m_Value: {x: 0.1, y: -0.15, z: -0.05}
@@ -737,17 +776,17 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 0.5
   maximumSteps:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 24
   minimumStepSize:
-    m_OverrideState: 1
-    m_Value: 2
+    m_OverrideState: 0
+    m_Value: 0.25
   blurIterations:
     m_OverrideState: 1
     m_Value: 2
   reprojection:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0
   enabled:
     m_OverrideState: 1
     m_Value: 1
@@ -839,22 +878,22 @@ MonoBehaviour:
     m_Value: 0
   reflectionProbesContributionWeight:
     m_OverrideState: 0
-    m_Value: 1
+    m_Value: 0.1
   noiseMode:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0
   noiseTexture:
     m_OverrideState: 0
     m_Value: {fileID: 0}
   noiseScale:
     m_OverrideState: 0
-    m_Value: 0.5
+    m_Value: 2.5
   noiseMinMax:
     m_OverrideState: 0
-    m_Value: {x: 0, y: 1}
+    m_Value: {x: -0.75, y: 2.5}
   noiseVelocity:
     m_OverrideState: 0
-    m_Value: {x: 0.05, y: 0.1, z: 0.075}
+    m_Value: {x: 0.1, y: -0.15, z: -0.05}
   distortionTexture:
     m_OverrideState: 0
     m_Value: {fileID: 0}
@@ -863,10 +902,10 @@ MonoBehaviour:
     m_Value: 5
   distortionIntensity:
     m_OverrideState: 0
-    m_Value: {x: 1, y: 1, z: 1}
+    m_Value: {x: 0.1, y: -0.1, z: 0.05}
   distortionVelocity:
     m_OverrideState: 0
-    m_Value: {x: -0.025, y: -0.05, z: -0.05}
+    m_Value: {x: -0.02, y: 0.01, z: 0.015}
   renderPassEvent:
     m_OverrideState: 0
     m_Value: 550
@@ -875,7 +914,7 @@ MonoBehaviour:
     m_Value: 0.5
   maximumSteps:
     m_OverrideState: 0
-    m_Value: 16
+    m_Value: 24
   minimumStepSize:
     m_OverrideState: 0
     m_Value: 0.25
@@ -1348,7 +1387,7 @@ MonoBehaviour:
     m_Value: {r: 0, g: 0, b: 0, a: 1}
   progress:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 0.172
 --- !u!114 &8307880825781926897
 MonoBehaviour:
   m_ObjectHideFlags: 3

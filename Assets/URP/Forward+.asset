@@ -19,7 +19,7 @@ MonoBehaviour:
     AfterOpaque: 0
     Source: 1
     NormalSamples: 2
-    Intensity: 1
+    Intensity: 2
     DirectLightingStrength: 1
     Radius: 0.2
     Samples: 0
@@ -141,13 +141,13 @@ MonoBehaviour:
   m_RendererFeatures:
   - {fileID: -8135757167310299317}
   - {fileID: 367515877368583667}
-  - {fileID: 1499767318321007722}
   - {fileID: -1117760374853251000}
   - {fileID: 1686037507923947356}
   - {fileID: -7467311065034896554}
   - {fileID: -2118444302437725960}
   - {fileID: -3627013809836168037}
-  m_RendererFeatureMap: 4b9fa11ff6fb178ff3d5de47bead19056a8c430e6e3ed0144850dd78dcea7cf05cafca312e026617564b405d26c85e98f8c8bf8421c699e29b6c471d2842aacd
+  - {fileID: 1250954779559080990}
+  m_RendererFeatureMap: 4b9fa11ff6fb178ff3d5de47bead19054850dd78dcea7cf05cafca312e026617564b405d26c85e98f8c8bf8421c699e29b6c471d2842aacd1e34b281be485c11
   m_UseNativeRenderPass: 1
   xrSystemData: {fileID: 0}
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
@@ -241,7 +241,7 @@ MonoBehaviour:
   isShaderMismatchLogPrinted: 0
   isDebuggerLogPrinted: 0
   isBackfaceLightingLogPrinted: 0
---- !u!114 &1499767318321007722
+--- !u!114 &1250954779559080990
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -250,11 +250,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0138e415fc4e0c94081ad1fcb661b240, type: 3}
-  m_Name: ScreenSpaceReflectionURP
-  m_EditorClassIdentifier: Assembly-CSharp::ScreenSpaceReflectionURP
-  m_Active: 0
-  shader: {fileID: 4800000, guid: 2c5af047abe71b94b90a267f4d45d465, type: 3}
+  m_Script: {fileID: 11500000, guid: a1614fc811f8f184697d9bee70ab9fe5, type: 3}
+  m_Name: DecalRendererFeature
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalRendererFeature
+  m_Active: 1
+  m_Settings:
+    technique: 0
+    maxDrawDistance: 1000
+    decalLayers: 0
+    dBufferSettings:
+      surfaceData: 2
+    screenSpaceSettings:
+      normalBlend: 0
 --- !u!114 &1686037507923947356
 MonoBehaviour:
   m_ObjectHideFlags: 0
