@@ -2,7 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!114 &-8135757167310299317
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -26,6 +26,15 @@ MonoBehaviour:
     BlurQuality: 0
     Falloff: 1000
     SampleCount: -1
+    Mode: 1
+    GTAOMinimumRadiusInPixels: 40
+    UseComputeShader: 0
+    GTAOTemporalFilterEnabled: 0
+    GTAOGhostingMitigation: 0.5
+    GTAOHistoryLength: 0.9
+    GTAODirectionCount: 2
+    GTAOStepCount: 4
+    GTAOSpatialFilter: 0
 --- !u!114 &-7808950293012007926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42,7 +51,7 @@ MonoBehaviour:
   shader: {fileID: 4800000, guid: 99fbb607dfb8047478ba227213e6fa09, type: 3}
 --- !u!114 &-7467311065034896554
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -70,7 +79,7 @@ MonoBehaviour:
   shader: {fileID: 4800000, guid: dfeda81a55e0421458c52c657987365f, type: 3}
 --- !u!114 &-3627013809836168037
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -84,7 +93,7 @@ MonoBehaviour:
   shader: {fileID: 4800000, guid: 52bbd3f3554626747a8b0ef07120e305, type: 3}
 --- !u!114 &-2118444302437725960
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -98,7 +107,7 @@ MonoBehaviour:
   shader: {fileID: 4800000, guid: 079436dc522cf7e4c9be91c2b7bcecac, type: 3}
 --- !u!114 &-1117760374853251000
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -109,9 +118,22 @@ MonoBehaviour:
   m_Name: VolumetricFogRendererFeature
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricFogRendererFeature
   m_Active: 1
-  downsampleDepthShader: {fileID: 4800000, guid: cffeaeec0396a2c4dad475266cc8dfeb,
-    type: 3}
+  downsampleDepthShader: {fileID: 4800000, guid: cffeaeec0396a2c4dad475266cc8dfeb, type: 3}
   volumetricFogShader: {fileID: 4800000, guid: 08f816187f9af0244a95556ee0cab83f, type: 3}
+--- !u!114 &-229213051813806418
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb9f2fe3baf0e8c46bf390df937e6187, type: 3}
+  m_Name: ScreenSpaceReflectionRendererFeature
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.ScreenSpaceReflectionRendererFeature
+  m_Active: 1
+  afterOpaque: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,11 +147,9 @@ MonoBehaviour:
   m_Name: Forward+
   m_EditorClassIdentifier: 
   debugShaders:
-    debugReplacementPS: {fileID: 4800000, guid: cf852408f2e174538bcd9b7fda1c5ae7,
-      type: 3}
+    debugReplacementPS: {fileID: 4800000, guid: cf852408f2e174538bcd9b7fda1c5ae7, type: 3}
     hdrDebugViewPS: {fileID: 4800000, guid: 573620ae32aec764abd4d728906d2587, type: 3}
-    probeVolumeSamplingDebugComputeShader: {fileID: 7200000, guid: 53626a513ea68ce47b59dc1299fe3959,
-      type: 3}
+    probeVolumeSamplingDebugComputeShader: {fileID: 7200000, guid: 53626a513ea68ce47b59dc1299fe3959, type: 3}
   probeVolumeResources:
     probeVolumeDebugShader: {fileID: 0}
     probeVolumeFragmentationDebugShader: {fileID: 0}
@@ -147,8 +167,8 @@ MonoBehaviour:
   - {fileID: -2118444302437725960}
   - {fileID: -3627013809836168037}
   - {fileID: 1250954779559080990}
-  m_RendererFeatureMap: 4b9fa11ff6fb178ff3d5de47bead19054850dd78dcea7cf05cafca312e026617564b405d26c85e98f8c8bf8421c699e29b6c471d2842aacd1e34b281be485c11
-  m_UseNativeRenderPass: 1
+  - {fileID: -229213051813806418}
+  m_RendererFeatureMap: 4b9fa11ff6fb178ff3d5de47bead19054850dd78dcea7cf05cafca312e026617564b405d26c85e98f8c8bf8421c699e29b6c471d2842aacd1e34b281be485c11ae3ec19cf1abd1fcl
   xrSystemData: {fileID: 0}
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   m_AssetVersion: 3
@@ -176,9 +196,10 @@ MonoBehaviour:
   m_DepthTextureFormat: 0
   m_AccurateGbufferNormals: 1
   m_IntermediateTextureMode: 0
+  m_TileOnlyMode: 0
 --- !u!114 &367515877368583667
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -218,6 +239,7 @@ MonoBehaviour:
       restoreCamera: 1
       offset: {x: 0, y: 0, z: 0, w: 0}
       cameraFieldOfView: 60
+    depthInputAttachment: 0
 --- !u!114 &432953528924819011
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,7 +265,7 @@ MonoBehaviour:
   isBackfaceLightingLogPrinted: 0
 --- !u!114 &1250954779559080990
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -264,7 +286,7 @@ MonoBehaviour:
       normalBlend: 0
 --- !u!114 &1686037507923947356
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
